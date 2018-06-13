@@ -1,12 +1,12 @@
 {
-  "name": "client",
+  "name": "Client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start:dev": "webpack-dev-server --mode development --open --hot"
   },
-  "author": "",
+  "author": "Ashish Gupta",
   "license": "ISC",
   "dependencies": {
     "react": "^16.4.0",
