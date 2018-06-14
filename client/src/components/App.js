@@ -1,30 +1,33 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import  actions from "../actions";
 class App extends Component{
 
-    state = {
-        test : ""
+    componentDidMount(){
+        console.log(actions);
     }
 
-    componentDidMount(){
-        fetch("http://localhost:3005/test",{method: "get"}).then((data)=>{
-            console.log(data);
-            return data.json();
-        }).then((res)=>{
-            console.log(res);
-            this.setState({
-                test: res.status1
-            });
-        });
-    }
     render(){
         return (
             <div>
             <h1>Welcome React Express</h1>
-            <h3>{this.state.test}</h3>
+            <h3 onClick = {()=>this.props.changeTest("changed")}>{this.props.test}</h3>
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (state)=>{
+    return ({
+        test : state.reducer1.test
+    })
+}
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        changeTest : val=>{
+            dispatch(actions.changeTest(val));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
