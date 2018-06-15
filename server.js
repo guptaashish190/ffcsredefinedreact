@@ -12,7 +12,7 @@ app.use(cors());
 
 app.get("/test",(req,res)=>{
     res.json({
-        status1: "sexy"
+        test: "Express Backend Working"
     });
     res.end();
 });
