@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import actions from '../actions';
 import '../styles/style.scss';
 
-const App = () => (
+const App = props => (
   <div>
     <h1>Welcome React Express</h1>
-    <button onClick={() => this.props.changeTest('Dispatch Working')}>{this.props.test}</button>
-    {!this.props.expressFetch ? <button onClick={() => this.props.fetchExpressRes()}>Check Express Fetch</button> : <h4>{this.props.expressFetch}</h4>}
+    <button onClick={() => props.changeTest('Dispatch Working')}>{props.test}</button><br />
+    <button onClick={() => props.fetchExpressRes()}>{props.expressFetch}</button>
   </div>
 );
+
+// Map State and Dispatch to props
 const mapStateToProps = state => ({
   test: state.reducer1.test,
   expressFetch: state.reducer1.fetchedData,
