@@ -10,6 +10,7 @@ module.exports = {
         "max-len" : 0,
         "no-unused-vars" : 1,
         "react/prop-types" : 0,
-        "no-unreachable" :0
+        "no-unreachable" :0,
+        "react/prefer-stateless-function" : 0
     }
 };
