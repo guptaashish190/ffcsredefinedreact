@@ -41,6 +41,7 @@ router.get('/getSlots', (req, res) => {
 
             // Check if the current element is theory
             if (data[i].TYPE === 'TH' || data[i].TYPE === 'ETH') {
+
                 // If it is then check whether the first item in the slot list contains 1 or 2 (1 for morning, 2 for evening)
                 if (slotsList[0].includes(timeIncludes)) {
                     filteredList.push(data[i]);
@@ -49,7 +50,7 @@ router.get('/getSlots', (req, res) => {
                 /* 
                 Else check the current element's last slot number 
                 Morning input means we need evening lab slots
-                ( >30 for morning and <=30 for evening) */
+                ( >30 for morning and <=30 for evening ) */
 
                 let labNumber = slotsList[slotsList.length - 1].split("L")[1];
 
@@ -63,7 +64,8 @@ router.get('/getSlots', (req, res) => {
         // Send the Response
         res.send({
             original: data.length,
-            filteredTime: filteredList.length
+            filteredTime: filteredList.length,
+            data : filteredList
         });
 
     });

@@ -1,5 +1,61 @@
-$offwhite : #ddd;
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+@import "./blueTheme.scss";
 body {
-    background : $offwhite;
+    margin : 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+    display : flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    height: 100px;
+    color: rgb(3, 0, 49);;
+    font-weight: bold;
+    font-size: 2em;
+    width : 100%;
+    background : $background;
+}
+
+.timetable{
+        background: $timetableBaseColor;
+        width:100%;
+        border-spacing: 0px;
+
+      td {
+          padding : 7px;
+          font-size: 0.9em;
+          text-align: center;
+      }
+
+      thead {
+        background: $timetableHeadColor;
+        font-weight: bold;
+        box-shadow: 0px 0px 2px $mediumBorder inset;
+        
+        td {
+          border: 1px solid $darkBorder;
+        }
+      }
+      tbody {
+        
+        
+        td{
+          border: 1px solid $lightBorder;
+          
+        }.alternateLabDarkenLine{
+          //      box-shadow: 1px -1px 4px black inset;
+              
+              td{
+                border-bottom : 1px solid $mediumBorder;
+              }
+        }
+      }
+      .days {
+        background: $timetableDayColor;
+        font-weight: bold;
+        border-right: 1px solid $mediumBorder;
+      }
+
 }

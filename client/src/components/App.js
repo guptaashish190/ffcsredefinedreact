@@ -2,19 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../actions';
 import '../styles/style.scss';
+import Header from './header';
+import Body from './body';
 
 class App extends React.Component {
-  componentDidMount() {
-    fetch('http://localhost:3005/api/getSlots?courses=CSE2003&preferredTime=%22evening%22&courses=MAT1014').then((data) => {
-      console.log(data);
-    });
-  }
   render() {
     return (
       <div>
-        <h1>Welcome React Express</h1>
-        <button onClick={() => this.props.changeTest('Dispatch Working')}>{this.props.test}</button><br />
-        <button onClick={() => this.props.fetchExpressRes()}>{this.props.expressFetch}</button>
+        <Header />
+        <Body />
       </div>
     );
   }
