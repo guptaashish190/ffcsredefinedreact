@@ -1,34 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300');
-@import "./blueTheme.scss";
+@import "./greenTheme.scss";
+@import "./radioButton.scss";
+
 body {
     margin : 0;
     font-family: 'Montserrat', sans-serif;
+    width: 100%;
 }
-
+input,button{
+  font-family: 'Montserrat', sans-serif;
+}
 .header {
     display : flex;
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
     height: 100px;
-    color: rgb(3, 0, 49);;
+    color: rgb(3, 0, 49);
     font-weight: bold;
     font-size: 2em;
-    width : 100%;
     background : $background;
 }
-
+.body{
+    display : block;
+    left: 50px;
+    padding: 0px;
+    margin: 0px;
+}
 .timetable{
-        background: $timetableBaseColor;
-        width:100%;
-        border-spacing: 0px;
-
-      td {
-          padding : 7px;
-          font-size: 0.9em;
-          text-align: center;
+      background: $timetableBaseColor;
+      width:100%;
+      border-spacing: 0px;
+      td{
+        text-align: center;
+        padding : 7px;
       }
-
       thead {
         background: $timetableHeadColor;
         font-weight: bold;
@@ -39,17 +45,35 @@ body {
         }
       }
       tbody {
-        
-        
         td{
           border: 1px solid $lightBorder;
-          
-        }.alternateLabDarkenLine{
-          //      box-shadow: 1px -1px 4px black inset;
-              
+        }
+        .alternateLabDarkenLine{
               td{
                 border-bottom : 1px solid $mediumBorder;
               }
+        }
+        .unSlotted {
+          font-size: 0.9em;
+        }
+        .addedSlot{
+          padding: 2px;
+          background: $addedSlotBackground; 
+          border: 1px solid darken($addedSlotBackground, 30);
+          div{
+            line-height: 20px;
+            div{
+              font-weight: 600;
+              font-size: 0.6em;
+              text-align: center;
+            }
+            div:nth-child(2){
+              font-weight: 900;
+              font-size: 0.8em;
+              background-color: lighten($addedSlotBackground,22);
+              color: rgb(0, 0, 0);
+            }
+          }
         }
       }
       .days {
@@ -58,4 +82,110 @@ body {
         border-right: 1px solid $mediumBorder;
       }
 
+}
+.preferencePanel{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 10% 44% 34% 12%;
+  width : 100%;
+  height: 300px;
+  background : $preferencePanelBackground;
+  margin-bottom : 60px;
+  box-shadow: 0px 0px 6px #aaa inset;
+
+  .addedCoursesList {
+    background : $addedListBackground;
+    box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
+    grid-column: 2 / 4;
+    grid-row: 2/4;
+    overflow-y: auto;
+    border-left: 1px solid darken($addedListBackground, 50);
+    ul{
+      margin-left: 10px;
+      list-style-type: none;
+      font-weight: bold;
+      padding:0;
+      li{
+        background: darken($addedListBackground, 10);
+        padding: 7px;
+        margin:0;
+        position: relative;
+        padding-left:20px;
+        margin-top: 1px;
+        border: 1px solid darken($addedListBackground, 50);
+        
+      input{
+        background: none;
+        background-image: url("../../public/img/close.png");
+        background-size: 30px 30px;
+        background-repeat: no-repeat;
+        position: absolute;
+        border: none;
+        right : 10px;
+        width:30px;
+        bottom: 2px;
+        cursor: pointer;
+        height: 30px;
+        }
+      }
+    }
+  }
+  .heading{
+    grid-column : 1/3;
+    color : #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background : $preferencePanelHeadingBackground;
+  }
+
+  .addCourses{
+    grid-column : 1 / 2;
+    text-align: center;
+    input, button{
+      margin-top: 10px;
+      padding :7px; 
+    }
+    input{
+      width : calc(100% - 30px);
+    }
+    button {
+      width : 200px;
+      padding :20px;
+      border : none;
+      box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
+      background-color : $addedListBackground;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease 0s;
+      &:hover{
+        background-color : darken($addedListBackground,10);
+      }
+    }
+  }
+  .timePreferenceOptions{
+    background : darken($preferencePanelBackground,10);
+    grid-row : 3/4;
+    grid-column: 1/2;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    div{
+      margin: auto;
+    }
+  }
+  .createButton{
+    grid-column: 1 / 3;
+    grid-row: 4 / 5;
+    box-shadow: none;
+    border: none;
+    color: white;
+    cursor : pointer;
+    font-size: 0.9em;
+    padding: 10px;
+    background : lighten($preferencePanelHeadingBackground,15);
+  }
 }

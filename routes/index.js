@@ -3,7 +3,6 @@ const express = require("express");
 const ffcsDB = require("../models/ffcsMongo.model");
 const router = express.Router();
 
-
 // Get Prefs from the main route and shrink the database
 
 /* Preferences Structure:
@@ -70,6 +69,19 @@ router.get('/getSlots', (req, res) => {
 
     });
 
+});
+
+router.get('/getCourse', (req,res) => {
+    console.log(req.query);
+    ffcsDB.findOne({CODE : req.query.course}, (err, data)=>{
+        console.log(data);
+        if(data !== null){
+            res.send(data);
+        }else{
+            res.send("invalid");
+        }
+        res.end();
+    });
 });
 
 // Export Router
