@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body {
+    margin : 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+}
+.green{
+    @import './greenTheme.scss';
+    @import "./radioButton.scss";
+    @import './style.scss';
+}
+.blue{
+    @import './blueTheme.scss';
+    @import "./radioButton.scss";
+    @import './style.scss';
+}
+.red{
+    @import './redTheme.scss';
+    @import "./radioButton.scss";
+    @import './style.scss';
+}
+.light{
+    @import './lightTheme.scss';
+    @import "./radioButton.scss";
+    @import './style.scss';
+}

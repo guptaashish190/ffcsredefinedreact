@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import reducer1 from './reducer1';
+import features from './features';
 import timetableReducer from './timetableReducer';
 import courseListReducer from './courseListReducer';
 
-const CombinedReducers = combineReducers({ reducer1, timetableReducer, courseListReducer });
+const CombinedReducers = combineReducers({ features, timetableReducer, courseListReducer });
 
 export default CombinedReducers;

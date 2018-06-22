@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import actions from '../actions';
-import '../styles/style.scss';
+import actions from '../actions/features';
+import '../styles/index.scss';
 import Header from './Header/header';
 import Body from './Body/body';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Header />
+      <div className={this.props.theme}>
+        <Header changeTheme={this.props.changeTheme} />
         <Body />
       </div>
     );
@@ -17,15 +17,11 @@ class App extends React.Component {
 }
 // Map State and Dispatch to props
 const mapStateToProps = state => ({
-  test: state.reducer1.test,
-  expressFetch: state.reducer1.fetchedData,
+  theme: state.features.theme,
 });
 const mapDispatchToProps = dispatch => ({
-  changeTest: (val) => {
-    dispatch(actions.changeTest(val));
-  },
-  fetchExpressRes: () => {
-    dispatch(actions.fetchExpressRes());
+  changeTheme: (theme) => {
+    dispatch(actions.changeTheme(theme));
   },
 });
 

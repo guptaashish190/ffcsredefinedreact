@@ -1,191 +1,240 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
-@import "./greenTheme.scss";
-@import "./radioButton.scss";
-
-body {
-    margin : 0;
-    font-family: 'Montserrat', sans-serif;
-    width: 100%;
-}
 input,button{
-  font-family: 'Montserrat', sans-serif;
-}
-.header {
-    display : flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    height: 100px;
-    color: rgb(3, 0, 49);
-    font-weight: bold;
-    font-size: 2em;
-    background : $background;
-}
-.body{
-    display : block;
-    left: 50px;
-    padding: 0px;
-    margin: 0px;
-}
-.timetable{
-      background: $timetableBaseColor;
-      width:100%;
-      border-spacing: 0px;
-      td{
-        text-align: center;
-        padding : 7px;
-      }
-      thead {
-        background: $timetableHeadColor;
+    font-family: 'Montserrat', sans-serif;
+    }
+    .header {
+        display : flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+        height: 100px;
+        color: rgb(3, 0, 49);
         font-weight: bold;
-        box-shadow: 0px 0px 2px $mediumBorder inset;
-        
-        td {
-          border: 1px solid $darkBorder;
-        }
-      }
-      tbody {
-        td{
-          border: 1px solid $lightBorder;
-        }
-        .alternateLabDarkenLine{
-              td{
-                border-bottom : 1px solid $mediumBorder;
-              }
-        }
-        .unSlotted {
-          font-size: 0.9em;
-        }
-        .addedSlot{
-          padding: 2px;
-          background: $addedSlotBackground; 
-          border: 1px solid darken($addedSlotBackground, 30);
-          div{
-            line-height: 20px;
-            div{
-              font-weight: 600;
-              font-size: 0.6em;
-              text-align: center;
-            }
-            div:nth-child(2){
-              font-weight: 900;
-              font-size: 0.8em;
-              background-color: lighten($addedSlotBackground,22);
-              color: rgb(0, 0, 0);
-            }
-          }
-        }
-      }
-      .days {
-        background: $timetableDayColor;
-        font-weight: bold;
-        border-right: 1px solid $mediumBorder;
-      }
-
-}
-.preferencePanel{
-  display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 10% 44% 34% 12%;
-  width : 100%;
-  height: 300px;
-  background : $preferencePanelBackground;
-  margin-bottom : 60px;
-  box-shadow: 0px 0px 6px #aaa inset;
-
-  .addedCoursesList {
-    background : $addedListBackground;
-    box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
-    grid-column: 2 / 4;
-    grid-row: 2/4;
-    overflow-y: auto;
-    border-left: 1px solid darken($addedListBackground, 50);
-    ul{
-      margin-left: 10px;
-      list-style-type: none;
-      font-weight: bold;
-      padding:0;
-      li{
-        background: darken($addedListBackground, 10);
-        padding: 7px;
-        margin:0;
+        font-size: 2em;
+        background : $background;
         position: relative;
-        padding-left:20px;
-        margin-top: 1px;
-        border: 1px solid darken($addedListBackground, 50);
-        
-      input{
-        background: none;
-        background-image: url("../../public/img/close.png");
-        background-size: 30px 30px;
-        background-repeat: no-repeat;
-        position: absolute;
-        border: none;
-        right : 10px;
-        width:30px;
-        bottom: 2px;
-        cursor: pointer;
-        height: 30px;
+        .themeChooser{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background-color : transparent; 
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            justify-content: space-around;
+            //box-shadow: 0px 0px 10px rgb(37, 37, 37) inset;
+            button{
+                margin: 10px;
+                box-shadow: 1px 1px 2px black;
+                width : 30px;
+                height: 30px;
+                background : black;
+                border-radius: 50%;
+                cursor: pointer;
+                outline: none;
+                &:nth-child(1){
+                    border: 2px solid rgb(115, 226, 115);
+                    background: rgb(124, 243, 124);
+                    &:hover{
+                        background: rgb(115, 226, 115); 
+                    }
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                &:nth-child(2){
+                    border: 2px solid rgb(115, 132, 226);
+                    background: rgb(173, 151, 253);
+                    &:hover{
+                        background: rgb(148, 115, 226); 
+                    }
+                }
+                &:nth-child(3){
+                    border: 2px solid rgb(226, 115, 115);
+                    background: rgb(253, 151, 151);
+                    &:hover{
+                        background: rgb(226, 115, 115); 
+                    }
+                }
+                &:nth-child(4){
+                    border: 2px solid rgb(192, 192, 192);
+                    background: rgb(216, 216, 216);
+                    &:hover{
+                        background: rgb(179, 179, 179); 
+                    }
+                }            }
         }
-      }
     }
-  }
-  .heading{
-    grid-column : 1/3;
-    color : #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background : $preferencePanelHeadingBackground;
-  }
-
-  .addCourses{
-    grid-column : 1 / 2;
-    text-align: center;
-    input, button{
-      margin-top: 10px;
-      padding :7px; 
+    .body{
+        display : block;
+        left: 50px;
+        padding: 0px;
+        margin: 0px;
     }
-    input{
-      width : calc(100% - 30px);
+    .timetable{
+        background: $timetableBaseColor;
+        width:100%;
+        border-spacing: 0px;
+        td{
+            text-align: center;
+            padding : 7px;
+        }
+        thead {
+            background: $timetableHeadColor;
+            font-weight: bold;
+            box-shadow: 0px 0px 2px $mediumBorder inset;
+            
+            td {
+            border: 1px solid $darkBorder;
+            }
+        }
+        tbody {
+            td{
+            border: 1px solid $lightBorder;
+            }
+            .alternateLabDarkenLine{
+                td{
+                    border-bottom : 1px solid $mediumBorder;
+                }
+            }
+            .unSlotted {
+            font-size: 0.9em;
+            }
+            .addedSlot{
+            padding: 2px;
+            background: $addedSlotBackground; 
+            border: 1px solid darken($addedSlotBackground, 30);
+            div{
+                line-height: 20px;
+                div{
+                font-weight: 600;
+                font-size: 0.6em;
+                text-align: center;
+                }
+                div:nth-child(2){
+                font-weight: 900;
+                font-size: 0.8em;
+                background-color: lighten($addedSlotBackground,22);
+                color: rgb(0, 0, 0);
+                }
+            }
+            }
+        }
+        .days {
+            background: $timetableDayColor;
+            font-weight: bold;
+            border-right: 1px solid $mediumBorder;
+        }
+  
     }
-    button {
-      width : 200px;
-      padding :20px;
-      border : none;
-      box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
-      background-color : $addedListBackground;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease 0s;
-      &:hover{
-        background-color : darken($addedListBackground,10);
-      }
-    }
-  }
-  .timePreferenceOptions{
-    background : darken($preferencePanelBackground,10);
-    grid-row : 3/4;
-    grid-column: 1/2;
-    font-weight: bold;
+    .preferencePanel{
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    text-align: center;
-    div{
-      margin: auto;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 10% 44% 34% 12%;
+    width : 100%;
+    height: 300px;
+    background : $preferencePanelBackground;
+    margin-bottom : 60px;
+    box-shadow: 0px 0px 6px #aaa inset;
+  
+    .addedCoursesList {
+        background : $addedListBackground;
+        box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
+        grid-column: 2 / 4;
+        grid-row: 2/4;
+        overflow-y: auto;
+        border-left: 1px solid darken($addedListBackground, 50);
+        ul{
+        margin-left: 10px;
+        list-style-type: none;
+        font-weight: bold;
+        padding:0;
+        li{
+            background: darken($addedListBackground, 10);
+            padding: 7px;
+            margin:0;
+            position: relative;
+            padding-left:20px;
+            margin-top: 1px;
+            color: darken($theoryTextColor,10);
+            border: 1px solid darken($addedListBackground, 50);
+            
+        input{
+            background: none;
+            background-image: url("../../public/img/close.png");
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            position: absolute;
+            border: none;
+            right : 10px;
+            width:30px;
+            bottom: 2px;
+            cursor: pointer;
+            height: 30px;
+            }
+        }
+        }
     }
-  }
-  .createButton{
-    grid-column: 1 / 3;
-    grid-row: 4 / 5;
-    box-shadow: none;
-    border: none;
-    color: white;
-    cursor : pointer;
-    font-size: 0.9em;
-    padding: 10px;
-    background : lighten($preferencePanelHeadingBackground,15);
-  }
-}
+    .heading{
+        grid-column : 1/3;
+        color : #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background : $preferencePanelHeadingBackground;
+    }
+  
+    .addCourses{
+        grid-column : 1 / 2;
+        text-align: center;
+        input, button{
+        margin-top: 10px;
+        padding :7px; 
+        }
+        input{
+        width : calc(100% - 30px);
+        }
+        button {
+        width : 200px;
+        padding :20px;
+        border : none;
+        box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
+        background-color : $addedListBackground;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease 0s;
+        &:hover{
+            background-color : darken($addedListBackground,10);
+        }
+        }
+    }
+    .timePreferenceOptions{
+        background : darken($preferencePanelBackground,10);
+        grid-row : 3/4;
+        grid-column: 1/2;
+        font-weight: bold;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        text-align: center;
+        div{
+        margin: auto;
+        }
+        label{
+            
+        color: $theoryTextColor;
+        }
+    }
+    .createButton{
+        grid-column: 1 / 3;
+        grid-row: 4 / 5;
+        box-shadow: none;
+        border: none;
+        color: white;
+        cursor : pointer;
+        font-size: 0.9em;
+        padding: 10px;
+        background : lighten($preferencePanelHeadingBackground,15);
+    }
+    }
+  
