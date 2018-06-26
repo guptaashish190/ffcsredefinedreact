@@ -137,21 +137,22 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-  const stateSlotList = state;
+  // const stateSlotList = state;
   switch (action.type) {
     case 'SUBMIT_COURSES':
-      for (let i = 0; i < action.payload.courses.length; i += 1) {
-        const courseData = action.payload.courses[i];
-        const slots = courseData.SLOT.split('+');
-        for (let j = 0; j < slots.length; j += 1) {
-          stateSlotList[slots[j]] = {
-            ...courseData,
-            SLOT: slots[j],
-          };
-        }
-      }
+      // for (let i = 0; i < action.payload.courses.length; i += 1) {
+      //   const courseData = action.payload.courses[i];
+      //   const slots = courseData.SLOT.split('+');
+      //   for (let j = 0; j < slots.length; j += 1) {
+      //     stateSlotList[slots[j]] = {
+      //       ...courseData,
+      //       SLOT: slots[j],
+      //     };
+      //   }
+      // }
 
-      return Object.assign({}, state, { ...stateSlotList });
+      // return Object.assign({}, state, { ...stateSlotList });
+      return state;
     default:
       return state;
   }

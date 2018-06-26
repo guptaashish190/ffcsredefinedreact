@@ -71,17 +71,55 @@ router.get('/getSlots', (req, res) => {
 
 });
 
+// Get the courses to add to the addedCourses list { Send The Course Validity Credits and Title}
 router.get('/getCourse', (req,res) => {
-    console.log(req.query);
-    ffcsDB.findOne({CODE : req.query.course}, (err, data)=>{
-        console.log(data);
-        if(data !== null){
-            res.send(data);
-        }else{
-            res.send("invalid");
-        }
-        res.end();
-    });
+         ffcsDB.find({CODE : req.query.course}, (err, data)=>{
+             
+            if(data[0] !== undefined){
+                let testFaculty = data[0].FACULTY;
+                let credits = Number(data[0].CREDITS);
+                let type = [data[0].TYPE];
+                for(let i =0; i < data.length; i++){
+                    if(testFaculty === data[i].FACULTY && !type.includes(data[i].TYPE)){
+                        credits+=Number(data[i].CREDITS);
+                        type.push(data[i].TYPE);
+                    }
+                }
+                res.send({
+                    CODE: data[0].CODE,
+                    TITLE: data[0].TITLE,
+                    CREDITS: credits
+                });
+            }else{
+                res.send("invalid");
+            }
+            res.end();
+        });
+});
+
+router.get('/submitCourses', (req,res) => {
+    const { courses, timePref } = req.query;
+    let sortedCourses = {};
+    let i = 0;
+    while(i<courses.length){
+
+        ffcsDB.find({CODE : courses[i]}, (err, data) => {
+            for(let j=0; j< data.length; j++){
+                if(sortedCourses[data[j].CODE] === undefined){
+                    sortedCourses[data[j].CODE] = {};
+                }
+                if(sortedCourses[data[j].CODE][data[j].FACULTY] === undefined){
+                    sortedCourses[data[j].CODE][data[j].FACULTY] = [];
+                }
+                sortedCourses[data[j].CODE][data[j].FACULTY].push(data[j]);
+            }
+            if(i === courses.length -1){
+                res.send(sortedCourses);
+            }
+            i++;
+        });
+
+    }
 });
 
 // Export Router
