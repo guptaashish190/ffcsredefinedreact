@@ -122,5 +122,11 @@ router.get('/submitCourses', (req,res) => {
     }
 });
 
+router.get('/autosuggest', (req,res) => {
+    ffcsDB.distinct('CODE', (err,data) => {
+        res.send(data);
+    });
+});
+
 // Export Router
 module.exports = router;

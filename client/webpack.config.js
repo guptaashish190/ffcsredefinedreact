@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   devServer: {
     contentBase: './public',
+    historyApiFallback: true,
   },
   entry: `${__dirname}/src/index.js`,
   output: {
@@ -29,6 +30,7 @@ module.exports = {
           'sass-loader',
         ],
       },
+      { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
     ],
   },

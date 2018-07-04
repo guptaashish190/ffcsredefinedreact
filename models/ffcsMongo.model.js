@@ -11,4 +11,4 @@ var dataSchema =  new Schema({
   FACULTY : String
 });
 
-module.exports = mongoose.model("ffcsObject",dataSchema,"ffcsObjects");
+module.exports = mongoose.model("ffcsDBObject",dataSchema,"ffcsDBObjects");

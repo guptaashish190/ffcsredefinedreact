@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
   render() {
     return (
       <div className="header">
-        FFCS REDEFINED
-
-        <div className="themeChooser">
-          <button onClick={() => this.props.changeTheme('green')} />
-          <button onClick={() => this.props.changeTheme('blue')} />
-          <button onClick={() => this.props.changeTheme('red')} />
-          <button onClick={() => this.props.changeTheme('light')} />
+        <div className="menu-items">
+          <Link to="/" >HOME</Link>
+          <Link to="/login" >LOGIN</Link>
+          <Link to="/about" >ABOUT</Link>
+        </div>
+        <div className="redefined-text">
+          <div>FFCS</div>&nbsp;<div>REDEFINED</div>
         </div>
       </div>
     );

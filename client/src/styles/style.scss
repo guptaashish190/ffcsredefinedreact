@@ -1,16 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900|Work+Sans:300');
+@import './blueTheme.scss';
+body {
+    margin : 0;
+    font-family: 'Quicksand', sans-serif;
+    width: 100%;
+    background-image: url('../../public/img/bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100%;
+}
+
 input,button{
-    font-family: 'Montserrat', sans-serif;
-    }
-    .header {
-        display : flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-        height: 100px;
-        color: rgb(3, 0, 49);
-        font-weight: bold;
-        font-size: 2em;
-        background : $background;
+    font-family: 'Quicksand', sans-serif;
+}
+.header {
+        position: fixed;
+        .menu-items{
+            font-size: 0.9em;
+            margin-top: 20px;
+            position: absolute;
+            left: 10px;
+            display: flex;
+            flex-direction: row;
+            color: rgb(224, 224, 224);
+            justify-content: space-around;
+            width: 300px;
+            a{      
+                text-decoration: none;
+                color: inherit;
+                padding: 10px;  
+                transition: background-color 0.3s ease 0s; 
+                transition-property: background-color,color;
+                cursor: pointer;
+                border-radius: 3px;
+                &:hover{
+                background-color: rgba(255, 255, 255, 0.534);
+                color: black;
+                }
+            }
+        }
+        .redefined-text{
+            position: absolute;
+            right: 10px;
+            color: #ddd;
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            div{
+                font-size: 1.8em;
+                color: rgb(254, 255, 218);
+                &:nth-child(1){
+                    font-family: 'Montserrat', sans-serif;
+                }   
+                &:nth-child(2){
+                    font-family: 'Work Sans', sans-serif;
+                } 
+            }
+        }
+        height: 80px;
+        background : transparent;
         position: relative;
         .themeChooser{
             position: absolute;
@@ -21,7 +71,6 @@ input,button{
             flex-direction: row;
             padding: 10px;
             justify-content: space-around;
-            //box-shadow: 0px 0px 10px rgb(37, 37, 37) inset;
             button{
                 margin: 10px;
                 box-shadow: 1px 1px 2px black;
@@ -63,14 +112,8 @@ input,button{
                     }
                 }            }
         }
-    }
-    .body{
-        display : block;
-        left: 50px;
-        padding: 0px;
-        margin: 0px;
-    }
-    .timetable{
+}
+.timetable{
         background: $timetableBaseColor;
         width:100%;
         border-spacing: 0px;
@@ -125,116 +168,192 @@ input,button{
             border-right: 1px solid $mediumBorder;
         }
   
-    }
-    .preferencePanel{
-    display: grid;
-    grid-template-columns: 20% 80%;
-    grid-template-rows: 10% 44% 34% 12%;
-    width : 100%;
-    height: 300px;
-    background : $preferencePanelBackground;
-    margin-bottom : 60px;
-    box-shadow: 0px 0px 6px #aaa inset;
-  
-    .addedCoursesList {
-        background : $addedListBackground;
-        box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
-        grid-column: 2 / 4;
-        grid-row: 2/4;
-        overflow-y: auto;
-        border-left: 1px solid darken($addedListBackground, 50);
-        ul{
-        margin-left: 10px;
-        list-style-type: none;
-        font-weight: bold;
-        padding:0;
-        li{
-            background: darken($addedListBackground, 10);
-            padding: 7px;
-            margin:0;
-            position: relative;
-            padding-left:20px;
-            margin-top: 1px;
-            color: darken($theoryTextColor,10);
-            border: 1px solid darken($addedListBackground, 50);
-            
-        input{
-            background: none;
-            background-image: url("../../public/img/close.png");
-            background-size: 30px 30px;
-            background-repeat: no-repeat;
-            position: absolute;
-            border: none;
-            right : 10px;
-            width:30px;
-            bottom: 2px;
-            cursor: pointer;
-            height: 30px;
+}
+.preferencePanel{
+        border-radius: 20px;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-rows: 6% 59% 29% 6%;
+        width : 100%;
+        height: 500px;
+        background : $preferencePanelBackground;
+        margin-bottom : 60px;
+        box-shadow: 0px 0px 6px #aaa inset;
+        overflow: hidden;
+        .addedCoursesList {
+            background : $addedListBackground;
+            box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
+            grid-column: 2 / 4;
+            grid-row: 2/4;
+            overflow-y: auto;
+            border-left: 1px solid darken($addedListBackground, 50);
+            ul{
+            margin-left: 10px;
+            list-style-type: none;
+            font-weight: 600;
+            padding:0;
+            li{
+                background: darken($addedListBackground, 10);
+                padding: 7px;
+                position: relative;
+                margin:0;
+                position: relative;
+                padding-left:20px;
+                margin-top: 1px;
+                color: darken($theoryTextColor,10);
+                border: 1px solid darken($addedListBackground, 40);
+                span{
+                    position: absolute;
+                    right: 80px;
+                }
+                
+            input{
+                background: none;
+                background-image: url("../../public/img/close.png");
+                background-size: 30px 30px;
+                background-repeat: no-repeat;
+                position: absolute;
+                border: none;
+                right : 10px;
+                width:30px;
+                bottom: 2px;
+                cursor: pointer;
+                height: 30px;
+                }
+            }
             }
         }
+        .heading{
+            grid-column : 1/3;
+            color : #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background : $preferencePanelHeadingBackground;
         }
-    }
-    .heading{
-        grid-column : 1/3;
-        color : #eee;
+    
+        .addCourses{
+            grid-column : 1 / 2;
+            text-align: center;
+            input, button{
+            margin-top: 10px;
+            padding :7px; 
+            }
+            .reactSelect{
+                margin: 0px auto;
+                .Select-value{
+                    padding: 7px;
+                    padding-left: 17px;
+                    font-weight: bold;
+                }
+                .Select-clear{
+                    display: none;
+                }
+                margin-top: 10px;
+                width: 230px;
+            }
+            button {
+            width : 200px;
+            padding :20px;
+            border : none;
+            box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
+            background-color : darken($addedListBackground,10);
+            border: 1px solid lighten($addedListBackground,50);
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease 0s;
+            &:hover{
+                background-color : darken($addedListBackground,40);
+            }
+            }
+        }
+        .timePreferenceOptions{
+            background : darken($preferencePanelBackground,10);
+            grid-row : 3/4;
+            grid-column: 1/2;
+            font-weight: bold;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            text-align: center;
+            &:hover{
+                background: darken($preferencePanelBackground,30);
+            }
+            div{
+            margin: auto;
+        }
+            label{
+                
+            color: $theoryTextColor;
+            }
+        }
+        .createButton{
+            grid-column: 1 / 3;
+            grid-row: 4 / 5;
+            box-shadow: none;
+            border: none;
+            color: white;
+            cursor : pointer;
+            font-size: 0.9em;
+            padding: 10px;
+            background : lighten($preferencePanelHeadingBackground,15);
+        }
+}
+.login-container{
+    width: 100%;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form{
+        background: rgba(221, 221, 221, 0.329);
+        box-shadow: 4px 4px 20px rgb(0, 0, 0);
+        border-radius: 10px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 10px;
-        background : $preferencePanelHeadingBackground;
-    }
-  
-    .addCourses{
-        grid-column : 1 / 2;
-        text-align: center;
-        input, button{
-        margin-top: 10px;
-        padding :7px; 
-        }
+        height: 300px;
+        width: 300px;
         input{
-        width : calc(100% - 30px);
+            border: 0;
+            background: rgba(29, 29, 29, 0.39);
+            margin:  10px;
+            color: #ddd;
+            border: 1px solid rgba(29, 29, 29, 0.692);
+            width: 200px;
+            padding: 12px;
+            transition: background-color 0.4s ease 0s;
+            &::placeholder{
+                color: rgba(255, 255, 255, 0.747);
+            }
+            &:focus,&:hover{
+                background-color: rgb(29, 29, 29);
+            }
         }
-        button {
-        width : 200px;
-        padding :20px;
-        border : none;
-        box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
-        background-color : $addedListBackground;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s ease 0s;
-        &:hover{
-            background-color : darken($addedListBackground,10);
-        }
-        }
-    }
-    .timePreferenceOptions{
-        background : darken($preferencePanelBackground,10);
-        grid-row : 3/4;
-        grid-column: 1/2;
-        font-weight: bold;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        text-align: center;
-        div{
-        margin: auto;
-        }
-        label{
+        input[type="submit"]{
+            margin: 10px;
+            padding: 12px;
+            border: none;
+            width: 150px;
+            background: transparent;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            box-shadow: none;
+            color: #111;
+            background: #ddd;
+            border-radius: 3px;
+            transition-property: box-shadow;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+            cursor: pointer;
+            &:hover{
+                box-shadow: 3px 3px 10px rgba(34, 34, 34, 0.596);
+            }
             
-        color: $theoryTextColor;
         }
     }
-    .createButton{
-        grid-column: 1 / 3;
-        grid-row: 4 / 5;
-        box-shadow: none;
-        border: none;
-        color: white;
-        cursor : pointer;
-        font-size: 0.9em;
-        padding: 10px;
-        background : lighten($preferencePanelHeadingBackground,15);
-    }
-    }
+}
+
   

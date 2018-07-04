@@ -13,6 +13,9 @@ module.exports = {
         "no-unreachable" :0,
         "react/prefer-stateless-function" : 0,
         "jsx-a11y/label-has-for" :0,
-        "no-alert" : 0
+        "no-alert" : 0,
+        "react/no-unused-state": 1,
+        "jsx-a11y/anchor-is-valid": 0,
+        "no-restricted-globals": 0
     }
 };

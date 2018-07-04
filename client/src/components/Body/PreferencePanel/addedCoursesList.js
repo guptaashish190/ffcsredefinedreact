@@ -8,7 +8,7 @@ class AddedCoursesList extends React.Component {
     if (this.props.courses.length !== 0) {
       return (
         <ul>
-          {this.props.courses.map(elem => <li key={shortID.generate()}>{elem.CODE}: {elem.TITLE} ( {elem.CREDITS} Credits )<input type="button" onClick={() => this.props.deleteElement(elem.CODE)} /></li>)}
+          {this.props.courses.map(elem => <li key={shortID.generate()}>{elem.CODE}: {elem.TITLE} <span>{elem.CREDITS} Credits</span><input type="button" onClick={() => this.props.deleteElement(elem.CODE)} /></li>)}
         </ul>
       );
     }

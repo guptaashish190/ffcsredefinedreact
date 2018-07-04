@@ -1,30 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import actions from '../../../actions/addCourseActions';
 
 class AddCourses extends React.Component {
-  state = {
-    inputValue: '',
-  }
+  constructor(props) {
+    super(props);
 
-  onAddClick = () => {
-    this.props.addToCourseList(this.state.inputValue);
-  }
-  onInputChange = (event) => {
-    this.setState({
-      inputValue: event.target.value,
+    axios.get('http://localhost:3005/api/autosuggest').then((data) => {
+      const mappedCourses = data.data.map(label => ({ value: label, label }));
+      this.setState({
+        suggestedCoursesList: mappedCourses,
+      });
     });
   }
 
-  checkPressEnter = (e) => {
-    if (e.keyCode === 13) {
-      this.onAddClick();
-    }
+  state = {
+    suggestedCoursesList: [],
+    selectedOption: '',
   }
+
+  onAddClick = () => {
+    this.props.addToCourseList(this.state.selectedOption);
+  }
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption: selectedOption.label });
+  }
+
   render() {
     return (
       <div className="addCourses">
-        <input onKeyUp={e => this.checkPressEnter(e)} onChange={e => this.onInputChange(e)} type="text" placeholder="Add Course" list="autocompleteList" />
+        <Select
+          name="form-field-name"
+          value={this.state.selectedOption}
+          onChange={this.handleChange}
+          options={this.state.suggestedCoursesList}
+          className="reactSelect"
+          onBlurResetsInput={false}
+        />
         <button onClick={() => this.onAddClick()} type="button">Add</button><br />
       </div>
     );

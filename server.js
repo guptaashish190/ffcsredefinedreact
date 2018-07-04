@@ -5,17 +5,20 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const router = require("./routes/index");
+const loginRouter = require('./routes/login-auth');
+const keys = require('./config/keysecrets');
+const passport = require('passport');
 //mongoose.set('debug', true);
 
 const app = express();
  //Connect to mongodb
-mongoose.connect("mongodb://localhost:27017/ffcsDB", (err) => {
+mongoose.connect(`mongodb://${keys.mongoDB.user}:${keys.mongoDB.password}@ds131546.mlab.com:31546/ffcsrusers`, (err) => {
     err ? console.log("Error Connecting to the db: " + err) : console.log("Successfully connected to db");
   });
 
 // Use BodyParser for handlingPOST Requests
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //Specify Port 
 const PORT = process.env.PORT || 3005;
@@ -27,18 +30,15 @@ app.use(morgan("dev"));
 app.use(express.static(__dirname + "/client/public"));
 
 // Use cors for Cross origin issues
-app.use(cors());
+app.use(cors({exposedHeaders: 'Authorization'}));
 
-// Test Route
-app.get("/test",(req,res)=>{
-    res.json({
-        test: "Express Backend Working"
-    });
-    res.end();
-});
+app.use(passport.initialize());
 
 // Index Router
 app.use("/api",router);
+
+// Login Router
+app.use("/auth",loginRouter);
 
 // Listening to PORT
 app.listen(PORT, ()=>{
