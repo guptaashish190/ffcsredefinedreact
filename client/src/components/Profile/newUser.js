@@ -78,7 +78,6 @@ class NewUser extends React.Component {
         username: this.state.username,
         password: this.state.password,
       };
-      console.log('saving user');
       axios.post('http://localhost:3005/profile/new/addUser', { userInfo }).then((res) => {
         if (res.data.status === 'ok') {
           window.localStorage.setItem('token', res.data.token);

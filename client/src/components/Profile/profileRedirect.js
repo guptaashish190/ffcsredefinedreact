@@ -10,7 +10,6 @@ class ProfileRedirect extends React.Component {
       headers: { authorization: `Bearer ${token}` },
     };
     axios.get('http://localhost:3005/auth/verifyToken', config).then((response) => {
-      console.log(response.data.user.newUser);
       if (response.data.user.newUser) {
         window.localStorage.setItem('newUserToken', token);
         this.props.history.push('/profile/new');
