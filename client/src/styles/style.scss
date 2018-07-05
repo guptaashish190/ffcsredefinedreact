@@ -376,6 +376,70 @@ input,button{
     }
 }
 
+.newUserDialog-container{
+    width: 100%;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .newUserDialog{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        background: rgba(192, 192, 192, 0.493);
+        ul{
+            list-style-type: none;
+            text-align: center;
+            padding: 0;
+            li{
+                background: rgba(255, 161, 161, 0.534);
+                padding: 7px;
+                border: 1px solid rgba(243, 12, 12, 0.815);
+                border-radius: 5px;
+                font-size: 0.8em;
+                width: 210px;
+                font-weight: 400;
+            }
+        }
+        input{
+            border: 0;
+            background: rgba(29, 29, 29, 0.39);
+            margin:  5px;
+            color: #ddd;
+            border: 1px solid rgba(29, 29, 29, 0.692);
+            width: 200px;
+            padding: 12px;
+            transition: background-color 0.4s ease 0s;
+            &::placeholder{
+                color: rgba(255, 255, 255, 0.747);
+            }
+            &:focus,&:hover{
+                background-color: rgb(29, 29, 29);
+            }
+        }
+        button {
+        margin: 10px;
+        padding: 12px;
+        border: none;
+        width: 120px;
+        background: transparent;
+        font-size: 1.2em;
+        text-transform: uppercase;
+        box-shadow: none;
+        color: #111;
+        background: #ddd;
+        border-radius: 3px;
+        transition-property: box-shadow;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+        cursor: pointer;
+        &:hover{
+            box-shadow: 3px 3px 10px rgba(34, 34, 34, 0.596);
+            }
+        }
+    }
+}
 
 //Google and Facebook Buttons
 .loginBtn {

@@ -13,8 +13,17 @@ router.get('/google',passport.authenticate('google',{
 
 // Google Auth Callback
 router.get('/google/redirect',passport.authenticate('google',{session: false}), (req,res) => {
-    const token = JWT.sign(req.user.toJSON(), config.jwtSecret);
-    res.redirect("http://localhost:8080/redirect/?token=" + token);
+    let token = '';
+    if(req.user.newUser){
+        const data = {
+            user: req.user.user.toJSON(),
+            newUser: req.user.newUser
+        };
+        token = JWT.sign(data, config.jwtSecret);
+    }else{
+        token = JWT.sign(req.user.user.toJSON(), config.jwtSecret);
+    }
+    res.redirect("http://localhost:8080/redirect/?token=" + token); 
 });
 
 

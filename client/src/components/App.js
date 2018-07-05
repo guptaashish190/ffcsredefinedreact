@@ -7,6 +7,7 @@ import LoginComponent from './Login/index';
 import Profile from './Profile/index';
 import ProfileRedirect from './Profile/profileRedirect';
 import userLoginActions from '../actions/userLoginActions';
+import NewUser from './Profile/newUser';
 import '../styles/style.scss';
 
 class App extends React.Component {
@@ -16,8 +17,9 @@ class App extends React.Component {
         <div>
           <Header user={this.props.user} logoutUser={this.props.logoutUser} />
           <Route exact path="/login" component={() => <LoginComponent user={this.props.user} setUser={this.props.setUser} />} />
-          <Route path="/profile" component={() => <Profile user={this.props.user} setUser={this.props.setUser} />} />
+          <Route exact path="/profile" component={() => <Profile user={this.props.user} setUser={this.props.setUser} />} />
           <Route exact path="/redirect" component={() => <ProfileRedirect user={this.props.user} setUser={this.props.setUser} />} />
+          <Route exact path="/profile/new" component={() => <NewUser user={this.props.user} setUser={this.props.setUser} />} />
           <Route path="/about" component={LoginComponent} />
           <Route exact path="/" component={Body} />
         </div>

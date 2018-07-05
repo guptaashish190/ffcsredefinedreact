@@ -24,7 +24,6 @@ passport.use(new FacebookStrategy(
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
     (accessToken, refreshToken, profile, done) => {
-        console.log(profile.photos[0].value);
         User.findOne({userID: profile.id}, (err,user) => {
             if(user){
                 done(null, user);
@@ -52,7 +51,10 @@ passport.use(new GoogleStrategy(
         User.findOne({userID: profile.id}, (err,user) => {
             console.log(profile.photos[0].value);
             if(user){
-                done(null, user);
+                done(null, {
+                    newUser: false,
+                    user: user
+                });
             }else{
                 new User({
                     userID: profile.id,
@@ -60,7 +62,10 @@ passport.use(new GoogleStrategy(
                     email: profile.emails.value,
                     photoURL: profile.photos[0].value
                 }).save().then( newUser => {
-                    done(null, newUser);
+                    done(null, {
+                        newUser: true,
+                        user: newUser
+                    });
                 });
             }
         });
