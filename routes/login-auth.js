@@ -16,7 +16,7 @@ router.get('/google/redirect',passport.authenticate('google',{session: false}), 
     let token = '';
     if(req.user.newUser){
         const data = {
-            user: req.user.user.toJSON(),
+            user: req.user.user,
             newUser: req.user.newUser
         };
         token = JWT.sign(data, config.jwtSecret);

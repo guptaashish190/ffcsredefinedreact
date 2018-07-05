@@ -49,23 +49,21 @@ passport.use(new GoogleStrategy(
     },
     (accessToken, refreshToken, profile, done) =>{
         User.findOne({userID: profile.id}, (err,user) => {
-            console.log(profile.photos[0].value);
             if(user){
                 done(null, {
                     newUser: false,
                     user: user
                 });
             }else{
-                new User({
+                const newUser = {
                     userID: profile.id,
                     displayName: profile.displayName,
                     email: profile.emails.value,
                     photoURL: profile.photos[0].value
-                }).save().then( newUser => {
-                    done(null, {
-                        newUser: true,
-                        user: newUser
-                    });
+                };
+                done(null, {
+                    newUser: true,
+                    user: newUser
                 });
             }
         });
