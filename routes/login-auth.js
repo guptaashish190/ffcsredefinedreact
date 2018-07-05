@@ -7,7 +7,7 @@ require('../config/passport');
 
 // Google Authentication
 router.get('/google',passport.authenticate('google',{
-    scope: ['profile'],
+    scope: ['profile', 'email'],
     prompt : "select_account" 
 }));
 
@@ -19,7 +19,9 @@ router.get('/google/redirect',passport.authenticate('google',{session: false}), 
 
 
 // Facebook Authentication
-router.get('/facebook', passport.authenticate('facebook'));
+router.get('/facebook', passport.authenticate('facebook',{
+    scope: ['email']
+}));
 
 router.get('/facebook/redirect', passport.authenticate('facebook',{session: false}), (req, res) => {
     const token = JWT.sign(req.user.toJSON(), config.jwtSecret);

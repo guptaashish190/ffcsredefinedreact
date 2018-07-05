@@ -15,13 +15,16 @@ const User = require('../models/user.model');
 //     });
 // });
 
+// Facebook Strategy
 passport.use(new FacebookStrategy(
     {
         clientID: keys.facebookAPI.ID,
         clientSecret: keys.facebookAPI.secret,
-        callbackURL: '/auth/facebook/redirect'
+        callbackURL: '/auth/facebook/redirect',
+        profileFields: ['id', 'displayName', 'photos', 'email']
     },
     (accessToken, refreshToken, profile, done) => {
+        console.log(profile.photos[0].value);
         User.findOne({userID: profile.id}, (err,user) => {
             if(user){
                 done(null, user);
@@ -29,6 +32,8 @@ passport.use(new FacebookStrategy(
                 new User({
                     userID: profile.id,
                     displayName: profile.displayName,
+                    email: profile.emails[0].value,
+                    photoURL: profile.photos[0].value
                 }).save().then( newUser => {
                     done(null, newUser);
                 });
@@ -43,15 +48,17 @@ passport.use(new GoogleStrategy(
         clientID : keys.googleAPI.ID,
         clientSecret: keys.googleAPI.secret
     },
-    (accessToken, refreshToken, profile, done) =>{  
-        
+    (accessToken, refreshToken, profile, done) =>{
         User.findOne({userID: profile.id}, (err,user) => {
+            console.log(profile.photos[0].value);
             if(user){
                 done(null, user);
             }else{
                 new User({
                     userID: profile.id,
                     displayName: profile.displayName,
+                    email: profile.emails.value,
+                    photoURL: profile.photos[0].value
                 }).save().then( newUser => {
                     done(null, newUser);
                 });

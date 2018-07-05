@@ -12,7 +12,7 @@ class Header extends React.Component {
     if (Object.keys(this.props.user).length === 0) {
       return <div style={{ display: 'none' }} />;
     }
-    return <span className="userNameText">{this.props.user.displayName}</span>;
+    return <div className="userHeader" ><span className="usernameText">{this.props.user.displayName}</span><img src={this.props.user.photoURL} alt="PP" /></div>;
   }
   render() {
     return (
