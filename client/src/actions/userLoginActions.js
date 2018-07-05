@@ -5,9 +5,10 @@ function setUser(user) {
   };
 }
 
-function removeUser() {
+function logoutUser() {
+  window.localStorage.removeItem('token');
   return {
-    type: 'REMOVE_USER',
+    type: 'LOGOUT_USER',
   };
 }
-export default { setUser, removeUser };
+export default { setUser, logoutUser };

@@ -1,5 +1,5 @@
 const initialState = {
-  user: null,
+  user: {},
 };
 
 export default function (state = initialState, action) {
@@ -8,8 +8,8 @@ export default function (state = initialState, action) {
       return state;
     case 'SET_USER':
       return Object.assign({}, state, { user: action.payload });
-    case 'REMOVE_USER':
-      return { user: null };
+    case 'LOGOUT_USER':
+      return { user: {} };
     default:
       return state;
   }

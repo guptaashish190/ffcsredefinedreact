@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./keysecrets');
 const User = require('../models/user.model');
 
@@ -14,6 +15,28 @@ const User = require('../models/user.model');
 //     });
 // });
 
+passport.use(new FacebookStrategy(
+    {
+        clientID: keys.facebookAPI.ID,
+        clientSecret: keys.facebookAPI.secret,
+        callbackURL: '/auth/facebook/redirect'
+    },
+    (accessToken, refreshToken, profile, done) => {
+        User.findOne({userID: profile.id}, (err,user) => {
+            if(user){
+                done(null, user);
+            }else{
+                new User({
+                    userID: profile.id,
+                    displayName: profile.displayName,
+                }).save().then( newUser => {
+                    done(null, newUser);
+                });
+            }
+        });
+    }
+));
+
 passport.use(new GoogleStrategy(
     {
         callbackURL: '/auth/google/redirect',
@@ -22,12 +45,12 @@ passport.use(new GoogleStrategy(
     },
     (accessToken, refreshToken, profile, done) =>{  
         
-        User.findOne({googleID: profile.id}, (err,user) => {
+        User.findOne({userID: profile.id}, (err,user) => {
             if(user){
                 done(null, user);
             }else{
                 new User({
-                    googleID: profile.id,
+                    userID: profile.id,
                     displayName: profile.displayName,
                 }).save().then( newUser => {
                     done(null, newUser);

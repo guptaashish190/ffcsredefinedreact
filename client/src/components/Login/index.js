@@ -1,12 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import axios from 'axios';
+import { withRouter, Link } from 'react-router-dom';
 
 class Login extends React.Component {
   componentWillMount() {
-    if (window.localStorage.getItem('token')) {
-      console.log(window.localStorage.getItem('token'));
+    const token = window.localStorage.getItem('token');
+    if (token) {
       this.props.history.push('/profile');
     }
+    return true;
   }
   render() {
     return (
@@ -15,15 +17,11 @@ class Login extends React.Component {
           <input name="regno" type="text" placeholder="Registration Number" />
           <input name="pass" type="password" placeholder="Password" />
           <input type="submit" value="LOGIN" />
+          <a className="loginBtn loginBtn--google" href="http://localhost:3005/auth/google" >Login Using Google</a>
+          <a className="loginBtn loginBtn--facebook" href="http://localhost:3005/auth/facebook" >Login Using Facebook</a>
         </form>
-        <a href="http://localhost:3005/auth/google">Google Login</a>
       </div>
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    getUser: state.userLoginReducer.user,
-  };
-}
-export default connect(mapStateToProps)(Login);
+export default withRouter(Login);
