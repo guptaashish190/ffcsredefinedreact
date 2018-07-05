@@ -33,8 +33,17 @@ router.get('/facebook', passport.authenticate('facebook',{
 }));
 
 router.get('/facebook/redirect', passport.authenticate('facebook',{session: false}), (req, res) => {
-    const token = JWT.sign(req.user.toJSON(), config.jwtSecret);
-    res.redirect("http://localhost:8080/redirect/?token=" + token);
+    let token = '';
+    if(req.user.newUser){
+        const data = {
+            user: req.user.user,
+            newUser: req.user.newUser
+        };
+        token = JWT.sign(data, config.jwtSecret);
+    }else{
+        token = JWT.sign(req.user.user.toJSON(), config.jwtSecret);
+    }
+    res.redirect("http://localhost:8080/redirect/?token=" + token); 
 });
 
 router.get('/verifyToken', (req,res) => {
