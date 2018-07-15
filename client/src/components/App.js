@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React from 'react';
 import Header from './Header/header';
-import Body from './Body/body';
+import Home from './Home';
 import LoginComponent from './Login/index';
 import Profile from './Profile/index';
 import ProfileRedirect from './Profile/profileRedirect';
@@ -21,7 +21,7 @@ class App extends React.Component {
           <Route exact path="/redirect" component={ProfileRedirect} />
           <Route exact path="/profile/new" component={NewUser} />
           <Route path="/about" component={LoginComponent} />
-          <Route exact path="/" component={Body} />
+          <Route exact path="/" component={Home} />
         </div>
       </Router>
     );

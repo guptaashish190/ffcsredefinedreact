@@ -4,8 +4,11 @@ import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 
 class ProfileRedirect extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     const { token } = queryString.parse(location.search);
+    if (!token) {
+      this.props.history.push('/login');
+    }
     const config = {
       headers: { authorization: `Bearer ${token}` },
     };

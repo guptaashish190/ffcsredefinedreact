@@ -5,7 +5,8 @@ const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const keys = require('./keysecrets');
 const User = require('../models/user.model');
-
+const JWT = require('jsonwebtoken');
+const secrets = require('./keysecrets');
 //Local Strategy
 passport.use(new LocalStrategy({
 }, (username, password, done) => {
@@ -14,13 +15,11 @@ passport.use(new LocalStrategy({
             console.log(valid);
             if(valid){
                 done(null, {
-                    user,
-                    err: null
+                    token: JWT.sign(user.toJSON(), secrets.jwtSecret),
                 });
             }else{
                 done(null, {
-                    user: null,
-                    err: 'User not found'
+                    token: null,
                 });
             }   
         })

@@ -338,7 +338,7 @@ input,button{
         align-items: center;
         height: 300px;
         width: 300px;
-        input{
+        .textfield{
             border: 0;
             background: rgba(29, 29, 29, 0.39);
             margin:  10px;
@@ -354,7 +354,7 @@ input,button{
                 background-color: rgb(29, 29, 29);
             }
         }
-        input:nth-child(3){
+        .login-button{
             margin: 10px;
             padding: 12px;
             border: none;
@@ -371,7 +371,7 @@ input,button{
             transition-timing-function: ease;
             cursor: pointer;
             &:hover{
-                box-shadow: 3px 3px 10px rgba(34, 34, 34, 0.596);
+                box-shadow: 3px 3px 10px rgba(34, 34, 34, 0.363);
             }
             
         }
@@ -394,7 +394,7 @@ input,button{
             list-style-type: none;
             text-align: center;
             padding: 0;
-            li{
+            li{ 
                 margin: 4px 0;
                 background: rgba(255, 161, 161, 0.534);
                 padding: 7px;
@@ -444,12 +444,23 @@ input,button{
     }
 }
 
+// errors 
+.error{
+    margin: 4px 0;
+    background: rgba(255, 161, 161, 0.534);
+    padding: 7px;
+    border: 1px solid rgba(243, 12, 12, 0.815);
+    border-radius: 5px;
+    font-size: 0.8em;
+    width: 210px;
+    font-weight: bold;
+}
+
 //Google and Facebook Buttons
 .loginBtn {
     box-sizing: border-box;
     position: relative;
     text-decoration: none;
-    /* width: 13em;  - apply for fixed size */
     margin-top: 6px;
     padding: 0 15px 0 46px;
     border: none;
