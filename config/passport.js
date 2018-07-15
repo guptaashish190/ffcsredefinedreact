@@ -1,19 +1,37 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LocalStrategy = require('passport-local');
+const bcrypt = require('bcrypt');
 const keys = require('./keysecrets');
 const User = require('../models/user.model');
 
+//Local Strategy
+passport.use(new LocalStrategy({
+}, (username, password, done) => {
+    User.findOne({username}).then((user) => {
+        bcrypt.compare(password, user.password, (err, valid) => {
+            console.log(valid);
+            if(valid){
+                done(null, {
+                    user,
+                    err: null
+                });
+            }else{
+                done(null, {
+                    user: null,
+                    err: 'User not found'
+                });
+            }   
+        })
+    }).catch(() => {
+        done(null, {
+            user: null,
+            err: 'User not found'
+        });
+    });
 
-// passport.serializeUser((user, done) =>{
-//     done(null,user.id);
-// });
-
-// passport.deserializeUser((userid, done) =>{
-//     User.findById(userid).then(user => {
-//         done(null,user);
-//     });
-// });
+}));
 
 // Facebook Strategy
 passport.use(new FacebookStrategy(

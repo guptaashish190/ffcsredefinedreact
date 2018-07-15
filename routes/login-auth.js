@@ -5,6 +5,13 @@ const config = require('../config/keysecrets');
 // Passport Config
 require('../config/passport');
 
+// Local Auth
+router.post('/local', passport.authenticate('local', {
+    session: false,
+}), (req, res) => {
+    console.log(req.user);
+});
+
 // Google Authentication
 router.get('/google',passport.authenticate('google',{
     scope: ['profile', 'email'],

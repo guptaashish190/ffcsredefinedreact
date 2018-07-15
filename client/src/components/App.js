@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header/header';
 import Body from './Body/body';
 import LoginComponent from './Login/index';
 import Profile from './Profile/index';
 import ProfileRedirect from './Profile/profileRedirect';
-import userLoginActions from '../actions/userLoginActions';
 import NewUser from './Profile/newUser';
+import protectRouteHOC from './HOCs/protectRouteHOC';
+
 import '../styles/style.scss';
 
 class App extends React.Component {
@@ -15,11 +15,11 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Header user={this.props.user} logoutUser={this.props.logoutUser} />
-          <Route exact path="/login" component={() => <LoginComponent user={this.props.user} setUser={this.props.setUser} />} />
-          <Route exact path="/profile" component={() => <Profile user={this.props.user} setUser={this.props.setUser} />} />
-          <Route exact path="/redirect" component={() => <ProfileRedirect user={this.props.user} setUser={this.props.setUser} />} />
-          <Route exact path="/profile/new" component={() => <NewUser user={this.props.user} setUser={this.props.setUser} />} />
+          <Header />
+          <Route exact path="/login" component={LoginComponent} />
+          <Route exact path="/profile" component={protectRouteHOC(Profile)} />
+          <Route exact path="/redirect" component={ProfileRedirect} />
+          <Route exact path="/profile/new" component={NewUser} />
           <Route path="/about" component={LoginComponent} />
           <Route exact path="/" component={Body} />
         </div>
@@ -27,16 +27,5 @@ class App extends React.Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    user: state.userLoginReducer.user,
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setUser: user => dispatch(userLoginActions.setUser(user)),
-    logoutUser: () => dispatch(userLoginActions.logoutUser()),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

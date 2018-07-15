@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import userLoginActions from '../../actions/userLoginActions';
 
 class Header extends React.Component {
   getLoginLogoutButton = () => {
@@ -31,4 +33,16 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    user: state.userLoginReducer.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logoutUser: () => dispatch(userLoginActions.logoutUser()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

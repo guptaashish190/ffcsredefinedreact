@@ -8,6 +8,9 @@ class NewUser extends React.Component {
     super(props);
 
     const token = window.localStorage.getItem('newUserToken');
+    if (!token) {
+      this.props.history.push('/login');
+    }
     const config = {
       headers: { authorization: `Bearer ${token}` },
     };
@@ -32,6 +35,9 @@ class NewUser extends React.Component {
       headers: { authorization: `Bearer ${token}` },
     };
     axios.get('http://localhost:3005/auth/verifyToken', config)
+      .then((res) => {
+        console.log(res.data);
+      })
       .catch(() => this.props.history.push('/login'));
   }
 
