@@ -19,25 +19,30 @@ input,button{
         position: fixed;
         .menu-items{
             font-size: 0.9em;
-            margin-top: 20px;
+            margin: 20px;
             position: absolute;
             left: 10px;
             display: flex;
             flex-direction: row;
             color: rgb(224, 224, 224);
             justify-content: space-around;
-            width: 300px;
-            a{      
-                text-decoration: none;
-                color: inherit;
-                padding: 10px;  
-                transition: background-color 0.3s ease 0s; 
-                transition-property: background-color,color;
-                cursor: pointer;
-                border-radius: 3px;
-                &:hover{
-                background-color: rgba(255, 255, 255, 0.534);
-                color: black;
+            padding: 0;
+            li{
+                list-style-type: none;
+                margin-left: 10px;
+                margin-right: 10px;
+                a{
+                    text-decoration: none;
+                    padding: 10px;
+                    color: inherit;
+                    transition: background-color 0.3s ease 0s; 
+                    transition-property: background-color,color;
+                    cursor: pointer;
+                    border-radius: 3px;
+                    &:hover{
+                    background-color: rgba(255, 255, 255, 0.534);
+                    color: black;
+                    }
                 }
             }
         }

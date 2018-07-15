@@ -7,8 +7,8 @@ import Profile from './Profile/index';
 import ProfileRedirect from './Profile/profileRedirect';
 import NewUser from './Profile/newUser';
 import protectRouteHOC from './HOCs/protectRouteHOC';
-
 import '../styles/style.scss';
+import timetable from './Timetable/Timetable/timetable';
 
 class App extends React.Component {
   render() {
@@ -18,6 +18,7 @@ class App extends React.Component {
           <Header />
           <Route exact path="/login" component={LoginComponent} />
           <Route exact path="/profile" component={protectRouteHOC(Profile)} />
+          <Route path="/timetable" component={protectRouteHOC(timetable)} />
           <Route exact path="/redirect" component={ProfileRedirect} />
           <Route exact path="/profile/new" component={NewUser} />
           <Route path="/about" component={LoginComponent} />
