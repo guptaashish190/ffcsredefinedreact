@@ -8,7 +8,7 @@ import ProfileRedirect from './Profile/profileRedirect';
 import NewUser from './Profile/newUser';
 import protectRouteHOC from './HOCs/protectRouteHOC';
 import '../styles/style.scss';
-import timetable from './Timetable/Timetable/timetable';
+import timetable from './Timetable';
 
 class App extends React.Component {
   render() {

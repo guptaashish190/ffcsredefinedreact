@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 class Tablecell extends React.Component {
   createSlot = () => (

@@ -9,6 +9,7 @@ require('../config/passport');
 router.post('/local', passport.authenticate('local', {
     session: false,
 }), (req, res) => {
+    console.log(req.user);
     res.send(req.user);
 });
 

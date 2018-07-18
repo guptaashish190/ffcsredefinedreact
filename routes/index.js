@@ -97,29 +97,58 @@ router.get('/getCourse', (req,res) => {
         });
 });
 
+// Send sorted courses from db
 router.get('/submitCourses', (req,res) => {
-    const { courses, timePref } = req.query;
+    let { courses, timePref } = req.query;
     let sortedCourses = {};
     let i = 0;
-    while(i<courses.length){
 
-        ffcsDB.find({CODE : courses[i]}, (err, data) => {
-            for(let j=0; j< data.length; j++){
-                if(sortedCourses[data[j].CODE] === undefined){
-                    sortedCourses[data[j].CODE] = {};
-                }
-                if(sortedCourses[data[j].CODE][data[j].FACULTY] === undefined){
-                    sortedCourses[data[j].CODE][data[j].FACULTY] = [];
-                }
-                sortedCourses[data[j].CODE][data[j].FACULTY].push(data[j]);
-            }
-            if(i === courses.length -1){
-                res.send(sortedCourses);
-            }
-            i++;
-        });
-
+    const addCourseToSortedJSON = (data) => {
+        if(sortedCourses[data.CODE] === undefined){
+            sortedCourses[data.CODE] = {};
+        }
+        if(sortedCourses[data.CODE][data.FACULTY] === undefined){
+            sortedCourses[data.CODE][data.FACULTY] = [];
+        }
+        sortedCourses[data.CODE][data.FACULTY].push(data);
     }
+    
+    let coursePromises = [];
+
+    courses.forEach((element) => {
+        coursePromises.push(ffcsDB.find({CODE : element}, (err, data) => {
+            for(let j=0; j< data.length; j++){
+                const slots = data[j].SLOT.split('+');
+                if(timePref === 'morning'){
+                    if((data[j].TYPE.includes('TH') || data[j].TYPE === 'SS') && slots[0].includes('1')){
+                        // Morning Theories
+                            addCourseToSortedJSON(data[j]);
+                    }else{
+                        // Evening Labs
+                        const slotNumber = data[j].SLOT.split('+')[0].split('L')[1];
+                        if(slotNumber >= 31 && slotNumber <=60){
+                            addCourseToSortedJSON(data[j]);
+                        }
+                    }
+                }else{
+                    if((data[j].TYPE.includes('TH') || data[j].TYPE === 'SS') && slots[0].includes('2')){
+                        // Evening Theories
+                            addCourseToSortedJSON(data[j]);
+                    }else{
+                        // Morning Labs
+                        const slotNumber = slots[0].split('L')[1];
+                        if(slotNumber >= 1 && slotNumber <=30){
+                            addCourseToSortedJSON(data[j]);
+                        }
+                    }
+                }
+            }
+        }));
+    });
+
+    Promise.all(coursePromises).then(() => {
+        res.send(sortedCourses);
+    });
 });
 
 router.get('/autosuggest', (req,res) => {
@@ -127,6 +156,7 @@ router.get('/autosuggest', (req,res) => {
         res.send(data);
     });
 });
+
 
 // Export Router
 module.exports = router;

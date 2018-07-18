@@ -13,19 +13,24 @@ class PrefPanel extends React.Component {
   render() {
     return (
       <div className="preferencePanel" >
-        <div className="heading">Select Preferences</div>
+        <div className="heading">Select Courses</div>
         <AddCourses />
-        <form className="timePreferenceOptions">
-          <div>
-            <input type="radio" id="morning" name="preferredTime" defaultChecked value="Morning" />
-            <label htmlFor="morning">Morning Theories</label>
-          </div>
-          <div>
-            <input type="radio" id="evening" name="preferredTime" value="Evening" />
-            <label htmlFor="evening">Evening Theories</label>
-          </div>
-        </form>
         <AddedCoursesList />
+
+        <div className="heading sec">Theory class timings</div>
+
+        <form className="timePreferenceOptions">
+
+          <label className="container">Morning Theories
+            <input type="radio" id="morning" name="preferredTime" defaultChecked value="morning" />
+            <span className="checkmark" />
+          </label>
+          <label className="container">Evening Theories
+            <input type="radio" id="evening" name="preferredTime" value="evening" />
+            <span className="checkmark" />
+          </label>
+
+        </form>
         <button onClick={() => this.onClickCreate()} className="createButton" type="button">Create Timetable</button>
       </div>
     );

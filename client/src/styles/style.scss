@@ -1,7 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:900|Work+Sans:300');
-@import './blueTheme.scss';
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import './theme.scss';
+
+
 body {
     margin : 0;
     font-family: 'Quicksand', sans-serif;
@@ -15,6 +17,7 @@ body {
 input,button{
     font-family: 'Quicksand', sans-serif;
 }
+
 .header {
         position: fixed;
         .menu-items{
@@ -29,20 +32,20 @@ input,button{
             padding: 0;
             li{
                 list-style-type: none;
-                margin-left: 10px;
-                margin-right: 10px;
+                border-left: 1px solid rgba(255, 255, 255, 0.212);
                 a{
+                    padding: 10px 20px;
                     text-decoration: none;
-                    padding: 10px;
                     color: inherit;
                     transition: background-color 0.3s ease 0s; 
                     transition-property: background-color,color;
                     cursor: pointer;
-                    border-radius: 3px;
                     &:hover{
-                    background-color: rgba(255, 255, 255, 0.534);
-                    color: black;
+                    background: rgba(255, 255, 255, 0.205);
                     }
+                }
+                &:nth-child(1){
+                    border-left: none;
                 }
             }
         }
@@ -195,136 +198,144 @@ input,button{
   
 }
 .preferencePanel{
-        border-radius: 20px;
-        display: grid;
-        grid-template-columns: 20% 80%;
-        grid-template-rows: 6% 59% 29% 6%;
-        width : 100%;
-        height: 500px;
-        background : $preferencePanelBackground;
-        margin-bottom : 60px;
-        box-shadow: 0px 0px 6px #aaa inset;
-        overflow: hidden;
-        .addedCoursesList {
-            background : $addedListBackground;
-            box-shadow: 0px 0px 10px darken($addedListBackground, 10) inset;
-            grid-column: 2 / 4;
-            grid-row: 2/4;
-            overflow-y: auto;
-            border-left: 1px solid darken($addedListBackground, 50);
-            ul{
-            margin-left: 10px;
-            list-style-type: none;
-            font-weight: 600;
-            padding:0;
-            li{
-                background: darken($addedListBackground, 10);
-                padding: 7px;
-                position: relative;
-                margin:0;
-                position: relative;
-                padding-left:20px;
-                margin-top: 1px;
-                color: darken($theoryTextColor,10);
-                border: 1px solid darken($addedListBackground, 40);
-                span{
-                    position: absolute;
-                    right: 80px;
-                }
-                
-            input{
-                background: none;
-                background-image: url("../../public/img/close.png");
-                background-size: 30px 30px;
-                background-repeat: no-repeat;
-                position: absolute;
-                border: none;
-                right : 10px;
-                width:30px;
-                bottom: 2px;
-                cursor: pointer;
-                height: 30px;
-                }
-            }
+    margin: 30px auto 60px auto;
+    width: 100%;
+    height: 930px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 8fr 2fr 4fr 1fr;
+
+    .addCourses{
+        width: 400px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0px 0px 20px black inset;
+        background: rgba(20, 20, 20, 0.932);
+        border-radius: 6px;
+        border: 1px solid rgb(71, 255, 148);
+        .Select{
+            width: 300px;
+            margin: 30px;
+            .Select-clear{
+                display: none;
             }
         }
-        .heading{
-            grid-column : 1/3;
-            color : #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            background : $preferencePanelHeadingBackground;
-        }
-    
-        .addCourses{
-            grid-column : 1 / 2;
-            text-align: center;
-            input, button{
-            margin-top: 10px;
-            padding :7px; 
-            }
-            .reactSelect{
-                margin: 0px auto;
-                .Select-value{
-                    padding: 7px;
-                    padding-left: 17px;
-                    font-weight: bold;
-                }
-                .Select-clear{
-                    display: none;
-                }
-                margin-top: 10px;
-                width: 230px;
-            }
-            button {
-            width : 200px;
-            padding :20px;
-            border : none;
-            box-shadow: 0px 0px 10px darken($addedListBackground,10) inset;
-            background-color : darken($addedListBackground,10);
-            border: 1px solid lighten($addedListBackground,50);
-            cursor: pointer;
+        button{
+            width: 200px;
+            height: 60px;
+            border: none;
+            background: #7fff97;
+            font-size: 1.2em;
             font-weight: bold;
+            cursor: pointer;
             transition: background-color 0.3s ease 0s;
             &:hover{
-                background-color : darken($addedListBackground,40);
-            }
+                background-color: lighten(#7fff97,10);
             }
         }
-        .timePreferenceOptions{
-            background : darken($preferencePanelBackground,10);
-            grid-row : 3/4;
-            grid-column: 1/2;
-            font-weight: bold;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr;
-            text-align: center;
-            &:hover{
-                background: darken($preferencePanelBackground,30);
+    }
+    .addedCoursesList{
+        border-bottom: 1px solid rgba(170, 170, 170, 0.226);
+        width: 100%;
+        height: 500px;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.315);
+        padding: 0px;
+        ul{
+            padding: 0px;
+          li{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 85%;
+            list-style-type: none;
+            color: rgb(206, 206, 206);
+            padding: 8px;
+            padding-left: 40px;
+            position: relative;
+            background: rgb(29, 29, 29);
+            margin-bottom: 10px;
+            input{
+                border: none;
+                background: none;
+                width:  20px;
+                background-image: url("../../public/img/close.png");
+                background-size: 20px 20px;
+                background-repeat: no-repeat;
+                margin: 10px;
+                cursor: pointer;
             }
             div{
-            margin: auto;
-        }
-            label{
-                
-            color: $theoryTextColor;
+                display: inline-block;
+                margin-right:8px;
+                border-radius: 50%;
+                width: 10px;
+                height: 10px;
+                background: #7fff97;
             }
+            span{
+                &:nth-child(1){
+                    color: #7fff97;
+                }
+            }
+          }  
         }
-        .createButton{
-            grid-column: 1 / 3;
-            grid-row: 4 / 5;
-            box-shadow: none;
-            border: none;
-            color: white;
-            cursor : pointer;
-            font-size: 0.9em;
-            padding: 10px;
-            background : lighten($preferencePanelHeadingBackground,15);
+    }
+    .heading{
+        border-top: 1px solid rgba(184, 255, 170, 0.404);
+        border-bottom: 1px solid rgba(184, 255, 170, 0.377);
+        text-transform: uppercase;
+        background: rgb(26, 26, 26);
+        box-shadow: 0px 0px 20px rgb(19, 19, 19) inset;
+        font-size: 1.1em;
+        text-shadow: 0px 0px 10px #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(202, 202, 202);
+        grid-column: 1 / 3;
+        font-family: 'Montserrat', sans-serif;
+        
+    }.sec{
+        margin-top: 60px;
+    }
+    .createButton{
+        border-radius: 4px;
+        grid-column: 1 / 3;
+        width: 200px;
+        margin: 0 auto;
+        background-color: #7fff97;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        font-size: 1.1em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.4s ease 0s;
+        &:hover{
+            background-color: #41ff64;
         }
+    }
+    .timePreferenceOptions{
+        margin: auto;
+        grid-column: 1 / 3;
+        @import url('./radioButton.scss');
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(20, 20, 20, 0.932);
+        border-radius: 6px;
+        border: 1px solid rgb(71, 255, 148);
+        text-shadow: 0px 0px 10px black;
+        box-shadow: 0px 0px 20px black inset;
+        padding: 25px;
+        width: 400px;
+    }
 }
+
 .login-container{
     width: 100%;
     height: 550px;
