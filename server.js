@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const router = require("./routes/index");
+const courseProcess = require("./routes/course-process");
 const loginRouter = require('./routes/login-auth');
 const keys = require('./config/keysecrets');
 const profileRouter = require('./routes/profile');
@@ -36,7 +36,7 @@ app.use(cors({exposedHeaders: 'Authorization'}));
 app.use(passport.initialize());
 
 // Index Router
-app.use("/api",router);
+app.use("/api",courseProcess);
 
 // Login Router
 app.use("/auth",loginRouter);
