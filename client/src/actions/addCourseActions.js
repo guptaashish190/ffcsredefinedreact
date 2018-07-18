@@ -23,20 +23,4 @@ function removeFromCourseList(course) {
   };
 }
 
-function submitCourses(courses, timePref) {
-  return (dispatch) => {
-    const coursesList = [];
-
-    for (let i = 0; i < courses.length; i += 1) {
-      coursesList.push(courses[i].CODE);
-    }
-    axios.get('http://localhost:3005/api/submitCourses', { params: { courses: coursesList, timePref } }).then((response) => {
-      dispatch({
-        type: 'SUBMIT_COURSES',
-        payload: response.data,
-      });
-    });
-  };
-}
-
-export default { addToCourseList, removeFromCourseList, submitCourses };
+export default { addToCourseList, removeFromCourseList };

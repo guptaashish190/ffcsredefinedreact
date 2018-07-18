@@ -1,14 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import AddCourses from './addCourses';
 import AddedCoursesList from './addedCoursesList';
-import actions from '../../../actions/addCourseActions';
+import distributeCourseAlgorithm from './distCourseAlgorithm';
 
 class PrefPanel extends React.Component {
   onClickCreate = () => {
+    const coursesList = [];
+    for (let i = 0; i < this.props.coursesList.length; i += 1) {
+      coursesList.push(this.props.coursesList[i].CODE);
+    }
+
     const timePref = document.querySelector('input[name="preferredTime"]:checked').value;
-    this.props.submitCourses(this.props.coursesList, timePref);
+
+    axios.get('http://localhost:3005/api/submitCourses', { params: { courses: coursesList, timePref } }).then((response) => {
+      distributeCourseAlgorithm(response.data);
+    });
   }
+
 
   render() {
     return (
@@ -43,11 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    submitCourses: (courses, timePref) => dispatch(actions.submitCourses(courses, timePref)),
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrefPanel);
+export default connect(mapStateToProps)(PrefPanel);
