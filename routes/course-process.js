@@ -107,10 +107,27 @@ router.get('/submitCourses', (req,res) => {
         if(sortedCourses[data.CODE] === undefined){
             sortedCourses[data.CODE] = {};
         }
-        if(sortedCourses[data.CODE][data.FACULTY] === undefined){
-            sortedCourses[data.CODE][data.FACULTY] = [];
+
+        if(data.TYPE.includes('L')){
+            
+            if(sortedCourses[data.CODE]['lab'] === undefined){
+            sortedCourses[data.CODE]['lab'] = {};
+            }
+            if(sortedCourses[data.CODE]['lab'][data.SLOT] === undefined){
+                sortedCourses[data.CODE]['lab'][data.SLOT] = [];
+            }
+            sortedCourses[data.CODE]['lab'][data.SLOT].push(data);
+        }else{
+            
+            if(sortedCourses[data.CODE]['theory'] === undefined){
+            sortedCourses[data.CODE]['theory'] = {};
+            }
+        
+            if(sortedCourses[data.CODE]['theory'][data.SLOT] === undefined){
+                sortedCourses[data.CODE]['theory'][data.SLOT] = [];
+            }
+            sortedCourses[data.CODE]['theory'][data.SLOT].push(data);
         }
-        sortedCourses[data.CODE][data.FACULTY].push(data);
     }
     
     let coursePromises = [];

@@ -134,13 +134,12 @@ const initialState = {
   L92: undefined,
   L93: undefined,
   L94: undefined,
-  processData: undefined,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'SUBMIT_COURSES':
-      return Object.assign({}, state, { processData: action.payload });
+    case 'SET_SLOT':
+      return Object.assign({}, state, { [action.payload.slot]: action.payload.element });
     default:
       return state;
   }

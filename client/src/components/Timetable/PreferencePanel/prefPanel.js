@@ -4,6 +4,7 @@ import axios from 'axios';
 import AddCourses from './addCourses';
 import AddedCoursesList from './addedCoursesList';
 import distributeCourseAlgorithm from './distCourseAlgorithm';
+import Actions from '../../../actions/timetableActions';
 
 class PrefPanel extends React.Component {
   onClickCreate = () => {
@@ -15,7 +16,10 @@ class PrefPanel extends React.Component {
     const timePref = document.querySelector('input[name="preferredTime"]:checked').value;
 
     axios.get('http://localhost:3005/api/submitCourses', { params: { courses: coursesList, timePref } }).then((response) => {
-      distributeCourseAlgorithm(response.data);
+      const selectedSlots = distributeCourseAlgorithm(response.data);
+      selectedSlots.forEach((slotObj) => {
+        this.props.setSlot(slotObj);
+      });
     });
   }
 
@@ -52,5 +56,10 @@ function mapStateToProps(state) {
     coursesList: state.courseListReducer.courses,
   };
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    setSlot: slotObj => dispatch(Actions.setSlot(slotObj)),
+  };
+}
 
-export default connect(mapStateToProps)(PrefPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(PrefPanel);
