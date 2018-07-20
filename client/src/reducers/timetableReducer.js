@@ -140,6 +140,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'SET_SLOT':
       return Object.assign({}, state, { [action.payload.slot]: action.payload.element });
+    case 'RESET_SLOTS':
+      return Object.assign(initialState);
     default:
       return state;
   }

@@ -51,13 +51,35 @@ const convertObjToList = (obj) => {
   return list;
 };
 
+const sortBasedOnAvailableSlots = (list) => {
+  list.sort((first, second) => {
+    if (first[1].theory && second[1].theory) {
+      return Object.keys(first[1].theory).length > Object.keys(second[1].theory).length;
+    } else if (first[1].theory) {
+      return 1;
+    }
+    return -1;
+  });
+  return list;
+};
+
+const convertNestedToCoursesList = (nestedList) => {
+  const list = [];
+  nestedList.forEach((elem) => {
+    list.push(elem[0]);
+  });
+  return list;
+};
+
 export default function (data) {
   let allDistSlots = [];
 
-  let sortedCourses = [];
+  const sorted = sortBasedOnAvailableSlots(convertObjToList(data));
 
+  let sortedCourses = convertNestedToCoursesList(sorted);
 
-  Object.keys(data).forEach((course) => {
+  console.log(sortedCourses);
+  sortedCourses.forEach((course) => {
     // For Theories
     console.log(course);
     if (data[course].theory) {

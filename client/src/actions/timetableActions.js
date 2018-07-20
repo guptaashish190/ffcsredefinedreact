@@ -1,8 +1,14 @@
-function setSlot(slot) {
+function setSlot(slotElement) {
   return {
     type: 'SET_SLOT',
-    payload: slot,
+    payload: slotElement,
   };
 }
 
-export default { setSlot };
+function resetSlots() {
+  return {
+    type: 'RESET_SLOTS',
+  };
+}
+
+export default { setSlot, resetSlots };

@@ -17,6 +17,7 @@ class PrefPanel extends React.Component {
 
     axios.get('http://localhost:3005/api/submitCourses', { params: { courses: coursesList, timePref } }).then((response) => {
       const selectedSlots = distributeCourseAlgorithm(response.data);
+      this.props.resetSlots();
       selectedSlots.forEach((slotObj) => {
         this.props.setSlot(slotObj);
       });
@@ -59,6 +60,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setSlot: slotObj => dispatch(Actions.setSlot(slotObj)),
+    resetSlots: () => dispatch(Actions.resetSlots()),
   };
 }
 
