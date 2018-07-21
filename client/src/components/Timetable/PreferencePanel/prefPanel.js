@@ -16,7 +16,7 @@ class PrefPanel extends React.Component {
     const timePref = document.querySelector('input[name="preferredTime"]:checked').value;
 
     axios.get('http://localhost:3005/api/submitCourses', { params: { courses: coursesList, timePref } }).then((response) => {
-      const selectedSlots = distributeCourseAlgorithm(response.data);
+      const selectedSlots = distributeCourseAlgorithm(response.data, timePref);
       this.props.resetSlots();
       selectedSlots.forEach((slotObj) => {
         this.props.setSlot(slotObj);
