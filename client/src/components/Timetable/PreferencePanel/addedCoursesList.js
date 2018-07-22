@@ -14,7 +14,7 @@ class AddedCoursesList extends React.Component {
                 <span><div />{elem.CODE}</span>
                 <span>{elem.TITLE} </span>
                 <span>{elem.CREDITS} Credit(s)
-                  <input type="button" onClick={() => this.props.deleteElement(elem.CODE)} />
+                  <input type="button" onClick={() => this.props.deleteElement({ CODE: elem.CODE, CREDITS: elem.CREDITS })} />
                 </span>
               </li>
              ))
@@ -28,7 +28,12 @@ class AddedCoursesList extends React.Component {
   render() {
     return (
       <div className="addedCoursesList" >
-        {this.mapCourses()}
+        <div className="main" >
+          {this.mapCourses()}
+        </div>
+        <div className="total-credits">
+          Total Credits: {this.props.totalCredits}
+        </div>
       </div>
     );
   }
@@ -37,6 +42,7 @@ class AddedCoursesList extends React.Component {
 function mapStateToProps(state) {
   return {
     courses: state.courseListReducer.courses,
+    totalCredits: state.courseListReducer.totalCredits,
   };
 }
 function mapDispatchToProps(dispatch) {

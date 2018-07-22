@@ -143,6 +143,22 @@ input,button{
                 }            }
         }
 }
+
+.timetable-prefs{
+    color: rgb(185, 185, 185);
+    background: rgb(22, 22, 22);
+    padding: 10px;
+    border: 1px solid #7fff97;
+    margin: 40px 0px;
+    label{
+        font-size: 1em;
+    }
+    span{
+        transform: scale(0.8,0.8) translate(0px,-4px);
+    }
+}
+
+
 .timetable{
         background: $timetableBaseColor;
         width:100%;
@@ -173,16 +189,18 @@ input,button{
             font-size: 0.9em;
             }
             .addedSlot{
-            padding: 2px;
+            padding: 0;
             background: $addedSlotBackground; 
             border: 1px solid darken($addedSlotBackground, 30);
-            cursor: pointer;
             position: relative;
             .container{
+                cursor: default;
                 padding:2px;
                 margin: 0;
                 line-height: 20px;
                 .display{
+                    padding: 4px;
+                        cursor: pointer;
                         div{
                         font-weight: 600;
                         font-size: 0.5em;
@@ -194,17 +212,20 @@ input,button{
                         background-color: lighten($addedSlotBackground,24);
                         color: rgb(0, 0, 0);
                         }
+                        &:active + .tt-slot-extra-info{
+                            opacity: 1;
+                        }
+                        &:active{
+                            box-shadow: 0px 0px 10px rgb(115, 152, 255) inset;
+                        }
                 }
+                
             }
             
-            &:active{
-                box-shadow: 0px 0px 10px rgb(115, 152, 255) inset;
-            }
-            .tooltip{
-                opacity: 1;
-            }
+            
             }
             .tt-slot-extra-info{
+                z-index: 2;
                 opacity: 0;
                 padding: 2px;
                 position: absolute;
@@ -213,7 +234,7 @@ input,button{
                 background: rgb(39, 39, 39);
                 min-width: 180px;
                 height: auto;
-                border: 1px solid $addedSlotBackground;
+                border: 2px solid rgb(103, 207, 255);
                 transition: opacity 0.2s ease 0s;
 
                 .extra-info-title{
@@ -280,50 +301,66 @@ input,button{
         }
     }
     .addedCoursesList{
+        position: relative;
         border-bottom: 1px solid rgba(170, 170, 170, 0.226);
         width: 100%;
         height: 500px;
-        overflow-y: auto;
         background: rgba(255, 255, 255, 0.315);
         padding: 0px;
-        ul{
-            padding: 0px;
-          li{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 85%;
-            list-style-type: none;
-            color: rgb(206, 206, 206);
-            padding: 8px;
-            padding-left: 40px;
-            position: relative;
-            background: rgb(29, 29, 29);
-            margin-bottom: 10px;
-            input{
-                border: none;
-                background: none;
-                width:  20px;
-                background-image: url("../../public/img/close.png");
-                background-size: 20px 20px;
-                background-repeat: no-repeat;
-                margin: 10px;
-                cursor: pointer;
-            }
-            div{
-                display: inline-block;
-                margin-right:8px;
-                border-radius: 50%;
-                width: 10px;
-                height: 10px;
-                background: #7fff97;
-            }
-            span{
-                &:nth-child(1){
-                    color: #7fff97;
+        .main{
+            height: inherit;
+            overflow-y: auto;
+            ul{
+                padding: 0px;
+              li{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 85%;
+                list-style-type: none;
+                color: rgb(206, 206, 206);
+                padding: 8px;
+                padding-left: 40px;
+                position: relative;
+                background: rgb(29, 29, 29);
+                margin-bottom: 10px;
+                input{
+                    border: none;
+                    background: none;
+                    width:  20px;
+                    background-image: url("../../public/img/close.png");
+                    background-size: 20px 20px;
+                    background-repeat: no-repeat;
+                    margin: 10px;
+                    cursor: pointer;
                 }
+                div{
+                    display: inline-block;
+                    margin-right:8px;
+                    border-radius: 50%;
+                    width: 10px;
+                    height: 10px;
+                    background: #7fff97;
+                }
+                span{
+                    &:nth-child(1){
+                        color: #7fff97;
+                    }
+                }
+              }  
             }
-          }  
+
+        }
+        .total-credits{
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            background-color: rgb(22, 22, 22);
+            color: rgb(194, 194, 194);
+            padding: 10px;
+            border: 1px solid #5bff79;
+            border-bottom: none;
+            border-right: none;
         }
     }
     .heading{
