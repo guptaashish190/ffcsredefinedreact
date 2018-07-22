@@ -1,20 +1,5 @@
 const initialState = {
-  courses: [
-
-    { CODE: 'MEE2002', TITLE: 'Strength of Materials', CREDITS: 4 },
-
-    { CODE: 'MEE2004', TITLE: 'Mechanics of Machines', CREDITS: 4 },
-
-    { CODE: 'MEE2003', TITLE: 'Thermal Engineering Systems', CREDITS: 4 },
-
-    { CODE: 'STS2001', TITLE: 'Reasoning Skill Enhancement', CREDITS: 1 },
-
-    { CODE: 'MAT2002', TITLE: 'Applications of Differential and Difference Equations', CREDITS: 4 },
-
-    { CODE: 'MEE1004', TITLE: 'Fluid Mechanics', CREDITS: 4 },
-
-    { CODE: 'MEE2005', TITLE: 'Heat Transfer', CREDITS: 4 },
-  ],
+  courses: [],
 };
 
 export default function (state = initialState, action) {

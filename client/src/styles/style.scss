@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:800|Roboto:300');
 @import './theme.scss';
 
 
@@ -80,11 +81,12 @@ input,button{
                 font-size: 1.8em;
                 color: rgb(254, 255, 218);
                 &:nth-child(1){
+                    transform: translate(0px, 3px);
                     font-family: 'Montserrat', sans-serif;
                 }   
                 &:nth-child(2){
-                    font-family: 'Work Sans', sans-serif;
-                } 
+                    font-family: 'Open Sans', sans-serif;
+                }
             }
         }
         height: 80px;
@@ -174,20 +176,61 @@ input,button{
             padding: 2px;
             background: $addedSlotBackground; 
             border: 1px solid darken($addedSlotBackground, 30);
-            div{
+            cursor: pointer;
+            position: relative;
+            .container{
+                padding:2px;
+                margin: 0;
                 line-height: 20px;
-                div{
-                font-weight: 600;
-                font-size: 0.6em;
-                text-align: center;
-                }
-                div:nth-child(2){
-                font-weight: 900;
-                font-size: 0.8em;
-                background-color: lighten($addedSlotBackground,22);
-                color: rgb(0, 0, 0);
+                .display{
+                        div{
+                        font-weight: 600;
+                        font-size: 0.5em;
+                        text-align: center;
+                        }
+                        div:nth-child(2){
+                        font-weight: 900;
+                        font-size: 0.7em;
+                        background-color: lighten($addedSlotBackground,24);
+                        color: rgb(0, 0, 0);
+                        }
                 }
             }
+            
+            &:active{
+                box-shadow: 0px 0px 10px rgb(115, 152, 255) inset;
+            }
+            .tooltip{
+                opacity: 1;
+            }
+            }
+            .tt-slot-extra-info{
+                opacity: 0;
+                padding: 2px;
+                position: absolute;
+                left: -50%;
+                bottom: -90px;
+                background: rgb(39, 39, 39);
+                min-width: 180px;
+                height: auto;
+                border: 1px solid $addedSlotBackground;
+                transition: opacity 0.2s ease 0s;
+
+                .extra-info-title{
+                    font-size: 0.5em;
+                    color: rgb(109, 209, 255);
+                }
+                .extra-info-main{
+                    div{
+                        padding-left: 10px;
+                        text-align: left;
+                        font-size: 1em;
+                        color: #ddd;
+                    }
+                }
+                div{
+                    font-size: 0.5em;
+                }
             }
         }
         .days {

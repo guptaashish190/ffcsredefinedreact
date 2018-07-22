@@ -1,5 +1,4 @@
-let occupiedSlots = [];
-
+let occupiedSlots;
 /* Convert Object to list
 for ex object to list => is
 {
@@ -98,8 +97,38 @@ const convertNestedToCoursesList = (nestedList) => {
 
 export default function (data, timeSlot) {
   let allDistSlots = [];
-
+  occupiedSlots = [];
   let listOfData = convertObjToList(data);
+
+  // Dist for Labs only
+  const sortedLabs = sortBasedOnAvailableSlots(listOfData, 'lab');
+  let sortedCoursesLA = convertNestedToCoursesList(sortedLabs);
+
+  sortedCoursesLA.forEach((course) => {
+    // For Labs
+    if (data[course].lab) {
+      const selectedSlot = getElement(data[course].lab, 'LA', timeSlot);
+      if (selectedSlot) {
+        const slots = selectedSlot.SLOT.split('+');
+        slots.forEach((slot) => {
+          allDistSlots.push({
+            slot,
+            element: {
+              SLOT: slot,
+              CODE: selectedSlot.CODE,
+              VENUE: selectedSlot.VENUE,
+              FACULTY: selectedSlot.FACULTY,
+              TITLE: selectedSlot.TITLE,
+            },
+          });
+        });
+      } else {
+        console.log('Couldnt set slot for: ', course);
+      }
+    }
+  });
+
+
   // Dist for theories only
   const sortedTheories = sortBasedOnAvailableSlots(listOfData, 'theory');
   let sortedCoursesTH = convertNestedToCoursesList(sortedTheories);
@@ -118,6 +147,8 @@ export default function (data, timeSlot) {
               SLOT: slot,
               CODE: selectedSlot.CODE,
               VENUE: selectedSlot.VENUE,
+              FACULTY: selectedSlot.FACULTY,
+              TITLE: selectedSlot.TITLE,
             },
           });
         });
@@ -128,32 +159,6 @@ export default function (data, timeSlot) {
   });
 
 
-  // Dist for Labs only
-
-  const sortedLabs = sortBasedOnAvailableSlots(listOfData, 'lab');
-  let sortedCoursesLA = convertNestedToCoursesList(sortedLabs);
-
-  sortedCoursesLA.forEach((course) => {
-    // For Labs
-    if (data[course].lab) {
-      const selectedSlot = getElement(data[course].lab, 'LA', timeSlot);
-      if (selectedSlot) {
-        const slots = selectedSlot.SLOT.split('+');
-        slots.forEach((slot) => {
-          allDistSlots.push({
-            slot,
-            element: {
-              SLOT: slot,
-              CODE: selectedSlot.CODE,
-              VENUE: selectedSlot.VENUE,
-            },
-          });
-        });
-      } else {
-        console.log('Couldnt set slot for: ', course);
-      }
-    }
-  });
   console.log(occupiedSlots);
   return allDistSlots;
 }
