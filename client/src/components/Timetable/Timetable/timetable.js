@@ -19,7 +19,7 @@ class Timetable extends React.Component {
               <td>11:00</td>
               <td>12:00</td>
               <td>--</td>
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <td>14:00</td>
               <td>15:00</td>
               <td>16:00</td>
@@ -36,7 +36,7 @@ class Timetable extends React.Component {
               <td>11:00</td>
               <td>12:00</td>
               <td>--</td>
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <td>14:00</td>
               <td>15:00</td>
               <td>16:00</td>
@@ -54,7 +54,7 @@ class Timetable extends React.Component {
               <td>10:46</td>
               <td>11:31</td>
               <td>12:16</td>
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <td>14:00</td>
               <td>14:46</td>
               <td>16:00</td>
@@ -71,7 +71,7 @@ class Timetable extends React.Component {
               <td>11:30</td>
               <td>12:15</td>
               <td>13:00</td>
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <td>14:45</td>
               <td>15:30</td>
               <td>16:45</td>
@@ -91,7 +91,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.TB1} slot="TB1" />
               <Tablecell added={this.props.slotState.TG1} slot="TG1" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.A2} slot="A2" />
               <Tablecell added={this.props.slotState.F2} slot="F2" />
               <Tablecell added={this.props.slotState.D2} slot="D2" />
@@ -108,7 +108,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L4} slot="L4" />
               <Tablecell added={this.props.slotState.L5} slot="L5" />
               <Tablecell added={this.props.slotState.L6} slot="L6" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L31} slot="L31" />
               <Tablecell added={this.props.slotState.L32} slot="L32" />
               <Tablecell added={this.props.slotState.L33} slot="L33" />
@@ -126,7 +126,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.TC1} slot="TC1" />
               <Tablecell added={this.props.slotState.TA1} slot="TA1" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.B2} slot="B2" />
               <Tablecell added={this.props.slotState.G2} slot="G2" />
               <Tablecell added={this.props.slotState.E2} slot="E2" />
@@ -143,7 +143,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L10} slot="L10" />
               <Tablecell added={this.props.slotState.L11} slot="L11" />
               <Tablecell added={this.props.slotState.L12} slot="L12" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L37} slot="L37" />
               <Tablecell added={this.props.slotState.L38} slot="L38" />
               <Tablecell added={this.props.slotState.L39} slot="L39" />
@@ -161,7 +161,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.V1} slot="V1" />
               <Tablecell added={this.props.slotState.V2} slot="V2" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.C2} slot="C2" />
               <Tablecell added={this.props.slotState.A2} slot="A2" />
               <Tablecell added={this.props.slotState.F2} slot="F2" />
@@ -178,7 +178,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L16} slot="L16" />
               <Tablecell slot="--" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L43} slot="L43" />
               <Tablecell added={this.props.slotState.L44} slot="L44" />
               <Tablecell added={this.props.slotState.L45} slot="L45" />
@@ -196,7 +196,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.TE1} slot="TE1" />
               <Tablecell added={this.props.slotState.TCC1} slot="TCC1" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.D2} slot="D2" />
               <Tablecell added={this.props.slotState.B2} slot="B2" />
               <Tablecell added={this.props.slotState.G2} slot="G2" />
@@ -213,7 +213,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L22} slot="L22" />
               <Tablecell added={this.props.slotState.L23} slot="L23" />
               <Tablecell added={this.props.slotState.L24} slot="L24" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L49} slot="L49" />
               <Tablecell added={this.props.slotState.L50} slot="L50" />
               <Tablecell added={this.props.slotState.L51} slot="L51" />
@@ -231,7 +231,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.TF1} slot="TF1" />
               <Tablecell added={this.props.slotState.TDD2} slot="TD1" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.E2} slot="E2" />
               <Tablecell added={this.props.slotState.C2} slot="C2" />
               <Tablecell added={this.props.slotState.TA2} slot="TA2" />
@@ -248,7 +248,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L28} slot="L28" />
               <Tablecell added={this.props.slotState.L29} slot="L29" />
               <Tablecell added={this.props.slotState.L30} slot="L30" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L55} slot="L55" />
               <Tablecell added={this.props.slotState.L56} slot="L56" />
               <Tablecell added={this.props.slotState.L57} slot="L57" />
@@ -266,7 +266,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.Y11} slot="Y11" />
               <Tablecell added={this.props.slotState.Y12} slot="Y12" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.X21} slot="X21" />
               <Tablecell added={this.props.slotState.Z21} slot="Z21" />
               <Tablecell added={this.props.slotState.Y21} slot="Y21" />
@@ -283,7 +283,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L74} slot="L74" />
               <Tablecell added={this.props.slotState.L75} slot="L75" />
               <Tablecell added={this.props.slotState.L76} slot="L76" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L77} slot="L77" />
               <Tablecell added={this.props.slotState.L78} slot="L78" />
               <Tablecell added={this.props.slotState.L79} slot="L79" />
@@ -301,7 +301,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.X11} slot="X11" />
               <Tablecell added={this.props.slotState.X12} slot="X12" />
               <Tablecell slot="--" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.Y21} slot="Y21" />
               <Tablecell added={this.props.slotState.Z21} slot="Z21" />
               <Tablecell added={this.props.slotState.X21} slot="X21" />
@@ -318,7 +318,7 @@ class Timetable extends React.Component {
               <Tablecell added={this.props.slotState.L86} slot="L86" />
               <Tablecell added={this.props.slotState.L87} slot="L87" />
               <Tablecell added={this.props.slotState.L88} slot="L88" />
-              <Tablecell slot="LUNCH" />
+              <td>LUNCH</td>
               <Tablecell added={this.props.slotState.L89} slot="L89" />
               <Tablecell added={this.props.slotState.L90} slot="L90" />
               <Tablecell added={this.props.slotState.L91} slot="L91" />

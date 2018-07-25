@@ -174,6 +174,36 @@ router.get('/autosuggest', (req,res) => {
     });
 });
 
+router.get('/getModifySlots', (req, res) => {
+    const {course, type}  = req.query;
+    console.log(course);
+    const categorized = {};
+    if(type === 'Slot'){
+        ffcsDB.find({CODE: course, TYPE: {$regex: '^((?!PJ).)*$'}},(err, data) => {
+            data.forEach( elem => {
+                if(elem.SLOT.includes('L')){
+                    if(categorized['Lab'] === undefined){
+                        categorized['Lab'] = {};
+                    }
+                    if(categorized['Lab'][elem.FACULTY] === undefined){
+                        categorized['Lab'][elem.FACULTY] = [];
+                    }
+                    categorized['Lab'][elem.FACULTY].push(elem);
+                }else{
+                    if(categorized['Theory'] === undefined){
+                        categorized['Theory'] = {};
+                    }
+                    if(categorized['Theory'][elem.FACULTY] === undefined){
+                        categorized['Theory'][elem.FACULTY] = [];
+                    }
+                    categorized['Theory'][elem.FACULTY].push(elem);
+                }
+            });
+            
+            res.send(categorized);
+        });
+    }
+});
 
 // Export Router
 module.exports = router;

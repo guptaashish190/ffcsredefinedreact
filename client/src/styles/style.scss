@@ -144,20 +144,120 @@ input,button{
         }
 }
 
-.timetable-prefs{
-    color: rgb(185, 185, 185);
+.modify-panel{
     background: rgb(22, 22, 22);
     padding: 10px;
-    border: 1px solid #7fff97;
+    border: 1px solid #82ff997e;
+    color: #ddd;
     margin: 40px 0px;
-    label{
+    position: relative;
+    display: none;
+    .close-button{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 50%;
+    }
+    .title{
+        display: block;
+        text-align: center;
+        font-weight: bold;
+    }
+    .modify-options{
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        .m-slot{
+            cursor: pointer;
+            font-size: 1.2em;
+            border: none;
+            padding: 10px;
+            background-color: rgb(91, 162, 255);
+            margin: 0px 10px;
+        }
+        .m-faculty{
+            cursor: pointer;
+            font-size: 1.2em;
+            border: none;
+            padding: 10px;
+            background-color: rgb(255, 151, 91);
+        }
+    }
+    .collapsable-list{
+        ul{
+            list-style-type: none;
+            li{
+                flex-direction: row;
+                margin-left: 40px;
+                .box{
+                    width: 100px;
+                    margin: 10px;
+                    padding: 10px;
+                    background-color: rgba(153, 255, 213, 0.301);
+                    transition: background-color 0.2s ease 0s;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: rgba(53, 253, 170, 0.521);
+                    }
+                }
+            }
+        }
+        
+        .title{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 6px;
+            background-color: rgba(221, 221, 221, 0.192); 
+            cursor: pointer;
+            transition: background-color 0.3s ease 0s;
+            &:hover{
+                background-color: rgba(153, 214, 255, 0.425);
+            }
+        }
+        .main-list{
+            display:none;
+        }
+        .visible{
+            display: block; 
+        }
+        .box-visible{
+            display: flex;
+        }
+        
+    }
+    .large{
+        margin-top: 20px;
         font-size: 1em;
     }
-    span{
-        transform: scale(0.8,0.8) translate(0px,-4px);
+    .medium{
+        margin-top: 4px;
+        font-size: 0.9em;
+    }
+    .selected{
+        background-color: #3B55A0;
+    }
+    .modify-button{
+        display: block;
+        margin: 10px auto;
+        width: 100px;
+        height: 40px;
+        border: none;
+        background: #7fff97;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease 0s;
+        &:hover{
+            background-color: lighten(#7fff97,10);
+        }
     }
 }
-
+.visible{
+    display: block;
+}
 
 .timetable{
         background: $timetableBaseColor;
@@ -190,6 +290,7 @@ input,button{
             }
             .addedSlot{
             padding: 0;
+            cursor: pointer;
             background: $addedSlotBackground; 
             border: 1px solid darken($addedSlotBackground, 30);
             position: relative;

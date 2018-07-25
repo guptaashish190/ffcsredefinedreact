@@ -4,7 +4,8 @@ import Actions from '../../../actions/modifySlotsActions';
 
 class Tablecell extends React.Component {
   onSlotClick = () => {
-    this.props.setSelectSlot(this.props.slot);
+    this.props.setSelectSlotCourse(this.props.added.CODE);
+    this.props.setVisible(true);
   }
   createSlot = () => (
     <div className="container">
@@ -24,10 +25,9 @@ class Tablecell extends React.Component {
     </div>
   )
 
-
   render() {
     return (
-      this.props.added ? <td rowSpan="1" className="addedSlot">{this.createSlot()}</td> : <td className="unSlotted" onClick={() => this.onSlotClick()} rowSpan="1"> {this.props.slot}</td>
+      this.props.added ? <td rowSpan="1" onClick={() => this.onSlotClick()} className="addedSlot">{this.createSlot()}</td> : <td className="unSlotted" rowSpan="1"> {this.props.slot}</td>
     );
   }
 }
@@ -40,7 +40,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setSelectSlot: slot => dispatch(Actions.setSelectSlot(slot)),
+    setSelectSlotCourse: course => dispatch(Actions.setSelectSlotCourse(course)),
+    setVisible: visible => dispatch(Actions.setVisible(visible)),
   };
 }
 
