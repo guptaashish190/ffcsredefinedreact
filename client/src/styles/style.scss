@@ -254,6 +254,45 @@ input,button{
             background-color: lighten(#7fff97,10);
         }
     }
+
+    .preview{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 10px auto;
+        margin-top: 10px;
+        width: 500px;
+        border: 1px solid rgba(221, 221, 221, 0.486);
+        .modify-preview{
+            color: rgb(44, 44, 44);
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #67ff81d5;
+            height: 80px;
+            div{
+                font-weight: bold;
+                width: 200px;
+                overflow: hidden;
+            }
+        }
+        .modify-preview-empty{
+            height: 80px;
+            color: rgb(44, 44, 44);
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px dashed rgba(221, 221, 221, 0.397);
+            background-color: rgba(221, 221, 221, 0.103);
+            div{
+                width: 200px;
+            }   
+        }
+    }
 }
 .visible{
     display: block;

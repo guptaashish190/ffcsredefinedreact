@@ -4,11 +4,47 @@ import classnames from 'classnames';
 import axios from 'axios';
 import CollapsableList from './collapsableList';
 import Actions from '../../../actions/modifySlotsActions';
+import Actions2 from '../../../actions/timetableActions';
 
 class TimetablePrefs extends React.Component {
   state = {
     selectedTheory: null,
     selectedLab: null,
+    labComponentList: [],
+    theoryComponentList: [],
+  }
+
+  onModifyClick = () => {
+    if (this.state.selectedTheory) {
+      const slots = this.state.selectedTheory.slot.split('+');
+      slots.forEach((slot) => {
+        this.props.setSlot({
+          slot,
+          element: {
+            SLOT: slot,
+            CODE: this.props.selectedCourse,
+            VENUE: this.state.selectedTheory.venue,
+            FACULTY: this.state.selectedTheory.faculty,
+            TITLE: this.state.selectedTheory.title,
+          },
+        });
+      });
+    }
+    if (this.state.selectedLab) {
+      const slots = this.state.selectedLab.slot.split('+');
+      slots.forEach((slot) => {
+        this.props.setSlot({
+          slot,
+          element: {
+            SLOT: slot,
+            CODE: this.props.selectedCourse,
+            VENUE: this.state.selectedLab.venue,
+            FACULTY: this.state.selectedLab.faculty,
+            TITLE: this.state.selectedLab.title,
+          },
+        });
+      });
+    }
   }
 
   onSetType = (type) => {
@@ -16,11 +52,18 @@ class TimetablePrefs extends React.Component {
     if (type === 'Slot') {
       axios.get('http://localhost:3005/api/getModifySlots', { params: { course: this.props.selectedCourse, type: 'Slot' } }).then((response) => {
         this.props.setResponseData(response.data);
+
+        if (this.props.setResponseData) {
+          this.setFacultyList('th');
+          this.setFacultyList('la');
+        }
+
+        console.log(response.data);
       });
     }
   }
 
-  getFacultyList = (type) => {
+  setFacultyList = (type) => {
     const theory = this.props.responseData.Theory;
     const lab = this.props.responseData.Lab;
 
@@ -30,17 +73,56 @@ class TimetablePrefs extends React.Component {
         size="medium"
         titleElement={elem}
         list={theory[elem].map(elem2 => ({ slot: elem2.SLOT, venue: elem2.VENUE }))}
-        select={(selected) => { this.setState({ selectedTheory: selected }); }}
+        select={selected => this.setSelected(selected, 'th')}
       />));
+
+      this.setState({
+        theoryComponentList: list,
+      });
     } else {
-      list = Object.keys(lab).map(elem => (<CollapsableList
+      let facultyObjectKeys = Object.keys(lab);
+      if (this.state.selectedTheory) {
+        facultyObjectKeys = facultyObjectKeys.filter(faculty => faculty === this.state.selectedTheory.faculty);
+        console.log(this.state.selectedTheory);
+      }
+      list = facultyObjectKeys.map(elem => (<CollapsableList
         size="medium"
         titleElement={elem}
-        list={lab[elem].map(elem2 => ({ slot: elem2.SLOT, venue: elem2.VENUE }))}
-        select={(selected) => { this.setState({ selectedLab: selected }); }}
+        list={lab[elem].map(elem2 => ({ slot: elem2.SLOT, venue: elem2.VENUE, title: elem2.TITLE }))}
+        select={selected => this.setSelected(selected, 'la')}
       />));
+
+      this.setState({
+        labComponentList: list,
+      }, () => {
+        console.log('dein');
+      });
     }
-    return list;
+  }
+
+  setSelected = (selected, type) => {
+    if (type === 'th') {
+      this.setFacultyList('th');
+      this.setState({ selectedTheory: selected }, () => {
+        this.setFacultyList('la');
+        console.log('done');
+      });
+    } else {
+      this.setState({ selectedLab: selected }, () => {
+        this.setFacultyList('th');
+        console.log('done');
+      });
+    }
+  }
+  getSelectedPanel = (type) => {
+    if (this.props.responseData[type]) {
+      return (
+        <div className="modify-preview-empty">
+          <div />
+        </div>
+      );
+    }
+    return '';
   }
 
   getPanel = () => {
@@ -48,10 +130,29 @@ class TimetablePrefs extends React.Component {
       case 'Slot':
         return (
           <div className="main-panel-slot" >
-            {this.props.responseData.Theory ? <CollapsableList size="large" titleElement="Theory" list={this.getFacultyList('th')} /> : []}
-            {this.props.responseData.Lab ? <CollapsableList size="large" titleElement="Lab" list={this.getFacultyList('la')} /> : []}
+            {this.props.responseData.Theory ? <CollapsableList size="large" titleElement="Theory" list={this.state.theoryComponentList} /> : []}
+            {this.props.responseData.Lab ? <CollapsableList size="large" titleElement="Lab" list={this.state.labComponentList} /> : []}
+            <div style={{ marginTop: '30px', textAlign: 'center', display: 'block' }}>Selected</div>
+            <div className="preview">
+              {this.state.selectedTheory ? (
+                <div className="modify-preview">
+                  <div>Faculty: {this.state.selectedTheory.faculty}</div>
+                  <div>Slot: {this.state.selectedTheory.slot}</div>
+                  <div>Venue: {this.state.selectedTheory.venue}</div>
+                </div>
+            ) : this.getSelectedPanel('Theory')}
 
-            <button className="modify-button">Modify</button>
+              {this.state.selectedLab ? (
+
+                <div className="modify-preview">
+                  <div>Faculty: {this.state.selectedLab.faculty}</div>
+                  <div>Slot: {this.state.selectedLab.slot}</div>
+                  <div>Venue: {this.state.selectedLab.venue}</div>
+                </div>
+            ) : this.getSelectedPanel('Lab')}
+
+            </div>
+            <button className="modify-button" onClick={() => this.onModifyClick()} >Modify</button>
           </div>
         );
       case 'Faculty':
@@ -93,6 +194,8 @@ const mapDispatchToProps = dispatch => ({
   setVisible: visible => dispatch(Actions.setVisible(visible)),
   setType: type => dispatch(Actions.setType(type)),
   setResponseData: data => dispatch(Actions.setResponseData(data)),
+  setLabList: obj => dispatch(Actions.setLabList(obj)),
+  setSlot: obj => dispatch(Actions2.setSlot(obj)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimetablePrefs);

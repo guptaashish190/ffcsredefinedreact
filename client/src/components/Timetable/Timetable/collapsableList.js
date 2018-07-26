@@ -19,7 +19,7 @@ class CollapsableList extends React.Component {
       return this.props.list.map((elem) => {
         const key = shortID.generate();
         return (
-          <li onClick={() => this.onSelect({ ...elem, title: this.props.titleElement })} key={key}>
+          <li onClick={() => this.onSelect({ ...elem, faculty: this.props.titleElement })} key={key}>
             <div className="box">
               <div>Slot: {elem.slot}</div>
               <div>Venue: {elem.venue}</div>

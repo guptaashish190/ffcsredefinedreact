@@ -24,7 +24,8 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { currentSelections: { theory: action.payload, lab: state.currentSelections.lab } });
     case 'SET_MODIFY_SELECTION_LAB':
       return Object.assign({}, state, { currentSelections: { lab: action.payload, theory: state.currentSelections.theory } });
-
+    case 'SET_LAB_LIST':
+      return Object.assign({}, state, { responseData: { theory: state.responseData.theory, lab: action.payload } });
     default:
       return state;
   }

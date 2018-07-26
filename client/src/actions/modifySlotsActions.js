@@ -37,6 +37,14 @@ function setModifySelectedLab(selection) {
     payload: selection,
   };
 }
+
+function setLabList(obj) {
+  return {
+    type: 'SET_LAB_LIST',
+    payload: obj,
+  };
+}
+
 export default {
   setSelectSlotCourse,
   setVisible,
@@ -44,4 +52,5 @@ export default {
   setResponseData,
   setModifySelectedTheory,
   setModifySelectedLab,
+  setLabList,
 };
