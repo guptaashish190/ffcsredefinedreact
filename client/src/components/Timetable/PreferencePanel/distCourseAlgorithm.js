@@ -157,8 +157,5 @@ export default function (data, timeSlot) {
       }
     }
   });
-
-
-  console.log(occupiedSlots);
-  return allDistSlots;
+  return { objs: allDistSlots, occupiedSlots };
 }

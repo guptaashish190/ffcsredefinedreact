@@ -5,6 +5,7 @@ import axios from 'axios';
 import CollapsableList from './collapsableList';
 import Actions from '../../../actions/modifySlotsActions';
 import Actions2 from '../../../actions/timetableActions';
+import clashingAlgo from './clashingAlgo';
 
 class TimetablePrefs extends React.Component {
   state = {
@@ -15,10 +16,19 @@ class TimetablePrefs extends React.Component {
   }
 
   onModifyClick = () => {
+    const toAddElements = [];
+
+    const clashingSlots = [];
+
     if (this.state.selectedTheory) {
       const slots = this.state.selectedTheory.slot.split('+');
+
       slots.forEach((slot) => {
-        this.props.setSlot({
+        // Clashing Algo Returns true for a clash
+        if (clashingAlgo(slot, this.props.occupiedSlots)) {
+          clashingSlots.push(slot);
+        }
+        toAddElements.push({
           slot,
           element: {
             SLOT: slot,
@@ -33,7 +43,10 @@ class TimetablePrefs extends React.Component {
     if (this.state.selectedLab) {
       const slots = this.state.selectedLab.slot.split('+');
       slots.forEach((slot) => {
-        this.props.setSlot({
+        if (clashingAlgo(slot, this.props.occupiedSlots)) {
+          clashingSlots.push(slot);
+        }
+        toAddElements.push({
           slot,
           element: {
             SLOT: slot,
@@ -44,6 +57,13 @@ class TimetablePrefs extends React.Component {
           },
         });
       });
+    }
+    if (clashingSlots.length === 0) {
+      toAddElements.forEach((obj) => {
+        this.props.setSlot(obj);
+      });
+    } else {
+      console.log('clashing', clashingSlots);
     }
   }
 
@@ -57,8 +77,6 @@ class TimetablePrefs extends React.Component {
           this.setFacultyList('th');
           this.setFacultyList('la');
         }
-
-        console.log(response.data);
       });
     }
   }
@@ -68,7 +86,7 @@ class TimetablePrefs extends React.Component {
     const lab = this.props.responseData.Lab;
 
     let list = [];
-    if (type === 'th') {
+    if (type === 'th' && theory) {
       list = Object.keys(theory).map(elem => (<CollapsableList
         size="medium"
         titleElement={elem}
@@ -79,11 +97,10 @@ class TimetablePrefs extends React.Component {
       this.setState({
         theoryComponentList: list,
       });
-    } else {
+    } else if (lab) {
       let facultyObjectKeys = Object.keys(lab);
       if (this.state.selectedTheory) {
         facultyObjectKeys = facultyObjectKeys.filter(faculty => faculty === this.state.selectedTheory.faculty);
-        console.log(this.state.selectedTheory);
       }
       list = facultyObjectKeys.map(elem => (<CollapsableList
         size="medium"
@@ -94,8 +111,6 @@ class TimetablePrefs extends React.Component {
 
       this.setState({
         labComponentList: list,
-      }, () => {
-        console.log('dein');
       });
     }
   }
@@ -105,15 +120,14 @@ class TimetablePrefs extends React.Component {
       this.setFacultyList('th');
       this.setState({ selectedTheory: selected }, () => {
         this.setFacultyList('la');
-        console.log('done');
       });
     } else {
-      this.setState({ selectedLab: selected }, () => {
-        this.setFacultyList('th');
-        console.log('done');
-      });
+      this.setFacultyList('th');
+      this.setState({ selectedLab: selected });
     }
   }
+
+
   getSelectedPanel = (type) => {
     if (this.props.responseData[type]) {
       return (
@@ -125,6 +139,7 @@ class TimetablePrefs extends React.Component {
     return '';
   }
 
+
   getPanel = () => {
     switch (this.props.panelType) {
       case 'Slot':
@@ -135,7 +150,7 @@ class TimetablePrefs extends React.Component {
             <div style={{ marginTop: '30px', textAlign: 'center', display: 'block' }}>Selected</div>
             <div className="preview">
               {this.state.selectedTheory ? (
-                <div className="modify-preview">
+                <div onClick={() => this.resetComponentList('th')} className="modify-preview">
                   <div>Faculty: {this.state.selectedTheory.faculty}</div>
                   <div>Slot: {this.state.selectedTheory.slot}</div>
                   <div>Venue: {this.state.selectedTheory.venue}</div>
@@ -144,7 +159,7 @@ class TimetablePrefs extends React.Component {
 
               {this.state.selectedLab ? (
 
-                <div className="modify-preview">
+                <div onClick={() => this.resetComponentList('la')} className="modify-preview">
                   <div>Faculty: {this.state.selectedLab.faculty}</div>
                   <div>Slot: {this.state.selectedLab.slot}</div>
                   <div>Venue: {this.state.selectedLab.venue}</div>
@@ -166,6 +181,17 @@ class TimetablePrefs extends React.Component {
     }
   }
 
+  resetComponentList = (type) => {
+    if (type === 'th') {
+      this.setState({ selectedTheory: null }, () => {
+        this.setFacultyList('la');
+      });
+    } else {
+      this.setState({ selectedLab: null }, () => {
+        this.setFacultyList('th');
+      });
+    }
+  }
   render() {
     return (
       <div className={classnames({ 'modify-panel': true, visible: this.props.visible })}>
@@ -189,6 +215,7 @@ const mapStateToProps = state => ({
   courses: state.courseListReducer.courses,
   panelType: state.modifySlotsReducer.type,
   responseData: state.modifySlotsReducer.responseData,
+  occupiedSlots: state.timetableReducer.occupiedSlots,
 });
 const mapDispatchToProps = dispatch => ({
   setVisible: visible => dispatch(Actions.setVisible(visible)),

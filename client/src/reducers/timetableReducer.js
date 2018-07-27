@@ -134,6 +134,7 @@ const initialState = {
   L92: undefined,
   L93: undefined,
   L94: undefined,
+  occupiedSlots: [],
 };
 
 export default function (state = initialState, action) {
@@ -142,6 +143,8 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { [action.payload.slot]: action.payload.element });
     case 'RESET_SLOTS':
       return Object.assign(initialState);
+    case 'SET_OCCUPIED_SLOTS':
+      return Object.assign({}, state, { occupiedSlots: action.payload });
     default:
       return state;
   }

@@ -11,4 +11,11 @@ function resetSlots() {
   };
 }
 
-export default { setSlot, resetSlots };
+function setOccupiedSlots(occupiedSlotsList) {
+  return {
+    type: 'SET_OCCUPIED_SLOTS',
+    payload: occupiedSlotsList,
+  };
+}
+
+export default { setSlot, resetSlots, setOccupiedSlots };
