@@ -2,11 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import AddCourses from './addCourses';
-import AddedCoursesList from './addedCoursesList';
 import distributeCourseAlgorithm from './distCourseAlgorithm';
+import NotificationDialog from '../Timetable/notificationDialog';
+import AddedCoursesList from './addedCoursesList';
 import Actions from '../../../actions/timetableActions';
 
 class PrefPanel extends React.Component {
+  state = {
+    notificationPanel: '',
+  }
+
+  onAcceptClick = () => {
+    console.log('sku');
+
+    this.setState({
+      notificationPanel: '',
+    });
+  }
+  onCancelClick = () => {
+    this.setState({
+      notificationPanel: '',
+    });
+  }
   onClickCreate = () => {
     const coursesList = [];
     for (let i = 0; i < this.props.coursesList.length; i += 1) {
@@ -22,9 +39,11 @@ class PrefPanel extends React.Component {
         this.props.setSlot(slotObj);
       });
       this.props.setOccupiedSlots(selectedSlots.occupiedSlots);
+      this.setState({
+        notificationPanel: <NotificationDialog onCancelClick={() => this.onCancelClick()} onAcceptClick={() => this.onAcceptClick()} errors={selectedSlots.status.errors} success={selectedSlots.status.success} />,
+      });
     });
   }
-
 
   render() {
     return (
@@ -47,6 +66,7 @@ class PrefPanel extends React.Component {
           </label>
 
         </form>
+        {this.state.notificationPanel}
         <button onClick={() => this.onClickCreate()} className="createButton" type="button">Create Timetable</button>
       </div>
     );

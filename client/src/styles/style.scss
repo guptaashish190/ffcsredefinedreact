@@ -298,6 +298,79 @@ input,button{
     display: block;
 }
 
+.notifications-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.63);
+    overflow-y: auto;
+    align-content: space-between;
+    flex-direction: column; 
+    .notifications{
+        width: auto;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow: visible;
+        ul{
+            list-style-type: none;  
+        }
+        .n-error{
+            background-color: rgb(255, 85, 85);
+            border: 1px solid rgba(255, 80, 80, 0.555);
+            text-align: center;
+            min-width: 500px;
+            color: white;
+            margin: 10px;
+            padding: 5px;
+        }
+        .n-success{
+            background-color: rgb(165, 255, 106);
+            border: 1px solid rgba(179, 255, 128, 0.555);
+            text-align: center;
+            min-width: 500px;
+            color: rgb(0, 0, 0);
+            margin: 10px;
+            padding: 5px;
+        }
+        
+    }
+    button{
+        padding: 10px;
+        background: #ddd;
+        border: none;
+        width: 150px;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    .accept-button{
+        border: 2px solid rgb(154, 255, 141);
+        background-color: rgb(95, 255, 80);
+        &:hover{
+            background-color: rgb(145, 255, 118)
+        }
+    }
+    .cancel-button{
+        border: 1px solid rgba(255, 153, 37, 0.692);
+        background-color: rgb(255, 238, 80);
+        &:hover{
+            background-color: rgb(255, 225, 142)
+        }
+    }
+}
+
+
 .timetable{
         transform: translate3d(0, 0, 0);
         background: $timetableBaseColor;

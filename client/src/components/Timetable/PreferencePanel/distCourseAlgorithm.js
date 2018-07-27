@@ -99,7 +99,8 @@ export default function (data, timeSlot) {
   let allDistSlots = [];
   occupiedSlots = [];
   let listOfData = convertObjToList(data);
-
+  const errorStatus = [];
+  const successStatus = [];
   // Dist for Labs only
   const sortedLabs = sortBasedOnAvailableSlots(listOfData, 'lab');
   let sortedCoursesLA = convertNestedToCoursesList(sortedLabs);
@@ -122,7 +123,9 @@ export default function (data, timeSlot) {
             },
           });
         });
+        successStatus.push(`Added Lab for: ${course}`);
       } else {
+        errorStatus.push(`Couldn't set slot for ${course} lab`);
         console.log('Couldnt set slot for: ', course);
       }
     }
@@ -152,10 +155,12 @@ export default function (data, timeSlot) {
             },
           });
         });
+        successStatus.push(`Added theory for: ${course}`);
       } else {
+        errorStatus.push(`Couldn't set slot for ${course} theory`);
         console.log('Couldnt set slot for: ', course);
       }
     }
   });
-  return { objs: allDistSlots, occupiedSlots };
+  return { objs: allDistSlots, occupiedSlots, status: { errors: errorStatus, success: successStatus } };
 }
