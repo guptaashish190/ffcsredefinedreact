@@ -13,8 +13,6 @@ class PrefPanel extends React.Component {
   }
 
   onAcceptClick = () => {
-    console.log('sku');
-
     this.setState({
       notificationPanel: '',
     });
@@ -48,7 +46,7 @@ class PrefPanel extends React.Component {
   render() {
     return (
       <div className="preferencePanel" >
-        <div className="heading">Select Courses</div>
+        <div className="heading"><span>Select Courses</span><span>Total credits: {this.props.totalCredits}</span></div>
         <AddCourses />
         <AddedCoursesList />
 
@@ -76,6 +74,7 @@ class PrefPanel extends React.Component {
 function mapStateToProps(state) {
   return {
     coursesList: state.courseListReducer.courses,
+    totalCredits: state.courseListReducer.totalCredits,
   };
 }
 function mapDispatchToProps(dispatch) {

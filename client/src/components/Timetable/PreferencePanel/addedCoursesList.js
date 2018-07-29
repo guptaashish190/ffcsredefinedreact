@@ -11,9 +11,10 @@ class AddedCoursesList extends React.Component {
           {this.props.courses.map(elem =>
             (
               <li key={shortID.generate()}>
-                <span><div />{elem.CODE}</span>
-                <span>{elem.TITLE} </span>
-                <span>{elem.CREDITS} Credit(s)
+                <span>{elem.CODE}</span>
+                <span>{elem.TITLE}</span>
+                <span>
+                  <span>{elem.CREDITS}&nbsp;Credit(s)</span>
                   <input type="button" onClick={() => this.props.deleteElement({ CODE: elem.CODE, CREDITS: elem.CREDITS })} />
                 </span>
               </li>
@@ -30,9 +31,6 @@ class AddedCoursesList extends React.Component {
       <div className="addedCoursesList" >
         <div className="main" >
           {this.mapCourses()}
-        </div>
-        <div className="total-credits">
-          Total Credits: {this.props.totalCredits}
         </div>
       </div>
     );

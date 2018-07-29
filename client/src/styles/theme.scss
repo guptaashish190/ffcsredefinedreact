@@ -1,9 +1,13 @@
 
-$timetableBaseColor : rgb(190, 255, 209);
-$timetableHeadColor  :rgb(98, 255, 138);
-$timetableDayColor : rgb(152, 255, 178);
-$darkBorder : rgba(35, 110, 0, 0.26);
-$mediumBorder : rgba(50, 110, 0, 0.329);
-$lightBorder : rgba(183, 255, 142, 0.521);
+$timetableBaseColor : #ececec;
+$timetableHeadColor  : #b1c7ff;
+$timetableDayColor : $timetableHeadColor;
+$darkBorder : rgba(0, 25, 167, 0.26);
+$mediumBorder : rgba(11, 0, 110, 0.329);
+$lightBorder : rgba(120, 126, 158, 0.342);
 
-$addedSlotBackground : rgba(86, 193, 255, 0.397);
+$addedSlotBackground : rgb(129, 194, 255);
+$barColor: #202020;
+$border: rgba(221, 221, 221, 0.37);
+$secondaryBase: transparent;
+$secondColor: #ffffff70;
